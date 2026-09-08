@@ -1,0 +1,15 @@
+docs/prompts.md
+  h_0382e731b45a27 9
+  h_0382e731b45a27 8
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "67dd5f7dfe6dd16297bfcac62ec35c121588aa67",
+  "prompts": {},
+  "humans": {
+    "h_0382e731b45a27": {
+      "author": "Facundo Carballo <carballofacundo70@gmail.com>"
+    }
+  }
+}
