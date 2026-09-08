@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>QuickMap — Alternativa B (Recuerdo en el tiempo) — Wireframe</title>
+<style>
+  :root{
+    --bg:#e4e2db; --card:#ffffff; --border:#c9c6bc; --border-strong:#8a877e;
+    --text:#1f1e1c; --text-secondary:#5c5952; --text-muted:#8a8780;
+    --red:#c62828; --red-bg:#fbe4e4;
+    --green:#2e7d32; --green-bg:#e8f3e8;
+    --amber:#a35a00; --amber-bg:#fbeedd;
+    --accent-bg:#eef0fb; --accent-border:#6a6fc4; --accent-text:#33377f;
+  }
+  * { box-sizing: border-box; }
+  body{
+    margin:0; padding:32px 24px; background:var(--bg);
+    font-family: -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+    color:var(--text);
+  }
+  h1{ font-size:20px; font-weight:500; margin:0 0 4px; color:var(--text); }
+  .subtitle{ font-size:14px; color:var(--text-secondary); margin:0 0 28px; }
+  .screens{
+    display:grid; grid-template-columns:repeat(4, minmax(200px,1fr));
+    gap:20px; max-width:1160px;
+  }
+  @media (max-width:1000px){ .screens{ grid-template-columns:repeat(2,1fr); } }
+  @media (max-width:560px){ .screens{ grid-template-columns:1fr; } }
+  .screen-label{
+    font-size:13px; color:var(--text-secondary); margin:0 0 8px; text-align:center;
+  }
+  .frame{
+    background:var(--card); border:1.5px solid var(--border-strong); border-radius:12px;
+    padding:16px; min-height:320px; display:flex; flex-direction:column; gap:8px;
+    box-shadow:0 4px 14px rgba(0,0,0,.12);
+  }
+  .field{
+    background:var(--bg); border:1px solid var(--border-strong); border-radius:8px;
+    padding:10px 12px; font-size:13px; color:var(--text-secondary);
+    display:flex; align-items:center; justify-content:space-between;
+  }
+  .btn{
+    width:100%; border:1px solid var(--border-strong); border-radius:8px;
+    background:var(--bg); padding:10px; font-size:13px; color:var(--text);
+    text-align:center; cursor:default;
+  }
+  .btn-accent{
+    width:100%; border:1px solid var(--accent-border); border-radius:8px;
+    background:var(--accent-bg); padding:10px; font-size:13px; color:var(--accent-text);
+    text-align:center; cursor:default; font-weight:500;
+  }
+  .grow{ flex:1; }
+  .caption{ font-size:11px; color:var(--text-muted); margin:0 0 2px; }
+  .stat-grid{ display:grid; grid-template-columns:1fr 1fr; gap:8px; }
+  .stat{
+    background:var(--bg); border:1px solid var(--border); border-radius:8px;
+    padding:10px; text-align:center;
+  }
+  .stat .num{ font-size:20px; font-weight:500; }
+  .stat .lbl{ font-size:11px; color:var(--text-secondary); margin-top:2px; }
+  .row{
+    display:flex; align-items:center; justify-content:space-between; gap:8px;
+    background:var(--bg); border:1px solid var(--border-strong);
+    border-radius:6px; padding:8px 10px; font-size:12px; color:var(--text);
+  }
+  .row.critical{ border-color:var(--red); background:var(--red-bg); }
+  .tag{
+    font-size:10px; padding:2px 7px; border-radius:20px; white-space:nowrap;
+  }
+  .tag-green{ background:var(--green-bg); color:var(--green); }
+  .tag-amber{ background:var(--amber-bg); color:var(--amber); }
+  .tag-red{ background:var(--red-bg); color:var(--red); }
+  .legend{ display:flex; align-items:center; gap:6px; font-size:11px; color:var(--text-secondary); margin-top:4px; }
+  .swatch{ width:10px; height:10px; border-radius:2px; background:var(--red); display:inline-block; }
+  svg text{ fill:var(--text); }
+  .node-green rect{ fill:var(--green-bg); stroke:var(--green); }
+  .node-green text{ fill:#1b5e20; }
+  .node-red rect{ fill:var(--red-bg); stroke:var(--red); }
+  .node-red text{ fill:#791f1f; }
+  .node-amber rect{ fill:var(--amber-bg); stroke:var(--amber); }
+  .node-amber text{ fill:#7a4400; }
+  .center-box{
+    flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center;
+    gap:10px; text-align:center;
+  }
+  .check{
+    width:44px; height:44px; border-radius:50%; background:var(--green-bg);
+    color:var(--green); display:flex; align-items:center; justify-content:center;
+    font-size:22px; font-weight:500;
+  }
+  .msg{ font-size:14px; color:var(--text); }
+  .msg-sub{ font-size:12px; color:var(--text-secondary); }
+</style>
+</head>
+<body>
+
+<h1>QuickMap — Alternativa B: Recuerdo en el tiempo</h1>
+<p class="subtitle">Wireframe conceptual · flujo pensado para uso esporádico, sin dependencia de memoria de sesiones previas</p>
+
+<div class="screens">
+
+  <div>
+    <p class="screen-label">Pantalla 1 · Elegir carrera</p>
+    <div class="frame">
+      <p class="caption">Elegí tu carrera para ver tu plan de estudio</p>
+      <div class="field">Seleccionar carrera <span>&#9662;</span></div>
+      <div class="grow"></div>
+      <div class="btn-accent">Continuar con Ingeniería en Informática</div>
+      <div class="btn" style="opacity:.6;">Elegir otra carrera</div>
+    </div>
+  </div>
+
+  <div>
+    <p class="screen-label">Pantalla 2 · Así quedó tu plan</p>
+    <div class="frame">
+      <p class="caption">Última actualización: hace 7 meses</p>
+      <div class="stat-grid">
+        <div class="stat"><div class="num">18</div><div class="lbl">materias aprobadas</div></div>
+        <div class="stat"><div class="num">5°</div><div class="lbl">cuatrimestre estimado</div></div>
+      </div>
+      <div class="grow"></div>
+      <div class="btn-accent">Actualizar mis materias</div>
+    </div>
+  </div>
+
+  <div>
+    <p class="screen-label">Pantalla 3 · Marcar materias (con estado rotulado)</p>
+    <div class="frame">
+      <div class="row"><span>Análisis matemático I</span><span class="tag tag-green">Aprobada</span></div>
+      <div class="row"><span>Álgebra</span><span class="tag tag-green">Aprobada</span></div>
+      <div class="row critical"><span>Análisis matemático II</span><span class="tag tag-red">Disponible</span></div>
+      <div class="row"><span>Física I</span><span class="tag tag-amber">Bloqueada</span></div>
+      <div class="grow"></div>
+      <div class="legend"><span class="swatch"></span> Camino crítico</div>
+      <div class="btn-accent">Guardar</div>
+    </div>
+  </div>
+
+  <div>
+    <p class="screen-label">Pantalla 4 · Confirmación</p>
+    <div class="frame">
+      <div class="center-box">
+        <div class="check">&#10003;</div>
+        <div class="msg">Tu camino crítico fue actualizado</div>
+        <div class="msg-sub">Próxima actualización recomendada: antes de la próxima inscripción</div>
+      </div>
+      <div class="btn">Volver al mapa</div>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>
