@@ -1,0 +1,15 @@
+docs/evaluacion/perfil-evaluado.md
+  h_0382e731b45a27 1-2,14-23
+  h_0382e731b45a27 13
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "37dd094880922b85951236bbb30b2069bfc166c6",
+  "prompts": {},
+  "humans": {
+    "h_0382e731b45a27": {
+      "author": "Facundo Carballo <carballofacundo70@gmail.com>"
+    }
+  }
+}
