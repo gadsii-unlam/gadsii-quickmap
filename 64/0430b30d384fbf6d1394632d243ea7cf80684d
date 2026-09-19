@@ -1,0 +1,30 @@
+docs/evaluacion/perfil-evaluado.md
+  s_ea2c32f33bc6f6::t_b6c43cded603da 27-35
+  h_0382e731b45a27 17,25-26
+  h_0382e731b45a27 24
+docs/evaluacion/brief.md
+  h_0382e731b45a27 1-208
+docs/evaluacion/wireframe-mvp.html
+  h_0382e731b45a27 1-747
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "640430b30d384fbf6d1394632d243ea7cf80684d",
+  "prompts": {},
+  "humans": {
+    "h_0382e731b45a27": {
+      "author": "Facundo Carballo <carballofacundo70@gmail.com>"
+    }
+  },
+  "sessions": {
+    "s_ea2c32f33bc6f6": {
+      "agent_id": {
+        "tool": "gemini",
+        "id": "b0cf1520-6ce4-495b-91e4-2c4a85e14bf5",
+        "model": "gemini-3.5-flash"
+      },
+      "human_author": "Facundo Carballo <carballofacundo70@gmail.com>"
+    }
+  }
+}
