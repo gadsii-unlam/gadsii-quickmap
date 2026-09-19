@@ -1,0 +1,12 @@
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "1d44d8f954bbae5f64a201e553019857e6c32e26",
+  "prompts": {},
+  "humans": {
+    "h_0382e731b45a27": {
+      "author": "Facundo Carballo <carballofacundo70@gmail.com>"
+    }
+  }
+}
