@@ -51,3 +51,13 @@ A la IA se le escapan los problemas que no están definidos en el brief.md pero 
 La IA es sumamente buena para detectar faltantes que si se describen en el brief.md y no se encuentran en el wireframe.
 ### Los falsos positivos de la IA, ¿por qué lo son?
 El único falso positivo de la IA se debió a una diferencia de criterio sobre la claridad del copy: la IA interpretó el texto como confuso, mientras que para el equipo es completamente comprensible.
+
+## 5. Informe al equipo evaluado
+
+A continuación se adjuntan las capturas de las hojas de evaluación física utilizadas, las cuales incluyen el Checklist de usabilidad y la Matriz de hallazgos junto con las conclusiones y recomendaciones generales:
+
+### Checklist de Usabilidad (H1 - H10)
+![Checklist de Usabilidad](1.jpeg)
+
+### Matriz de Hallazgos y Conclusiones Generales
+![Matriz de Hallazgos y Conclusiones](2.jpeg)
