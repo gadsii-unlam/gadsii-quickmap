@@ -1,0 +1,25 @@
+docs/evaluacion/perfil-evaluado.md
+  h_0382e731b45a27 54-55
+  s_e4d66d246f8c67::t_3469d5e12ef485 56-63
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "27d08d0345491cb2634a08812fcff714ce0e0ce6",
+  "prompts": {},
+  "humans": {
+    "h_0382e731b45a27": {
+      "author": "Facundo Carballo <carballofacundo70@gmail.com>"
+    }
+  },
+  "sessions": {
+    "s_e4d66d246f8c67": {
+      "agent_id": {
+        "tool": "gemini",
+        "id": "4a3540c6-4bd9-4800-87ee-6250d67220b4",
+        "model": "gemini-3.5-flash"
+      },
+      "human_author": "Facundo Carballo <carballofacundo70@gmail.com>"
+    }
+  }
+}
