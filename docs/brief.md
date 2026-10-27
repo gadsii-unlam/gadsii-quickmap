@@ -199,3 +199,19 @@ Los atributos que seleccionamos en base al análisis del TP 2 son:
 *   **Facilidad de aprendizaje:** El producto debe ser fácil de aprender a utilizarlo porque los estudiantes hoy en día ya utilizan otras herramientas como por ejemplo: planillas de Excel, anotaciones en cuadernos y grupos de WhatsApp para poder dar seguimiento a sus planes de estudio, por lo que si nuestro producto es difícil de aprender a utilizar, es probable que los usuarios continúen utilizando las mismas herramientas que hasta ahora porque ya las conocen.
 *   **Recuerdo en el tiempo:** Nuestro producto no será utilizado por los usuarios todo el tiempo, su uso es más esporádico, seguramente cuando más se utilice sea en las fechas cercanas a las inscripciones y un par de veces más durante el año de forma aislada, por lo tanto es necesario que cada vez que el usuario acceda recuerde fácilmente cómo utilizar el sistema, porque al igual que en el punto anterior, si cada vez que deben volver a utilizarlo tardan mucho en recordar cómo acceder a lo que necesitan o tienen que “re aprender” como hacerlo, pueden frustrarse y optar por opciones ya conocidas.
 *   **Satisfacción:** Es importante que los usuarios se sientan satisfechos con el sistema ya que por lo que obtuvimos en las encuestas sienten una gran frustración por no poder entender correctamente a qué materias les conviene anotarse en cada inscripción, por lo que si logramos que los alumnos entiendan bien su situación actual y los ayudamos a planificar sus cuatrimestres de la mejor manera posible a través de los camino críticos, entonces lograremos tener un impacto positivos en ellos y que puedan atravesar la etapa de inscripción de una mejor manera.
+
+# Trabajo práctico 5: Construcción del MVP, Prueba y Aprendizaje
+
+## Parte 1 - Antes de construir
+
+### 1. Métricas y criterios de éxito
+
+#### Métricas accionables
+
+*   **Tasa de correción de planificación (TCP):** Esta métrica se basa en medir el porcentaje de estudiantes que modifican su elección inicial de materias inmediatamente después de interactuar con el MVP de QuickMap, al descubrir su camino crítico. La forma de medirla es pedirles a los estudiantes que anoten las materias a las cuales planean inscribirse en el próximo cuatrimestre utilizando los métodos tradicionales, y luego verificar si modifican su elección al interactuar con QuickMap. En caso de que la TCP supere el 30% se confirma nuestra hipótesis inicial.
+
+*   **Tasa de conocimiento de camino crítico (TCCC):** Esta métrica se basa en medir el porcentaje de estudiantes que conocen el camino crítico de su carrera antes de interactuar con QuickMap utilizando los métodos tradicionales. Para medirla se les plantearía un caso hipotético en historial académico y se les pediría que marquen cuales son las 3 materias que se deberían anotar en el siguiente cuatrimestre para recibirse lo antes posible. En caso de que el 80% de los estudiantes conozcan el camino crítico de su carrera antes de interactuar con QuickMap, se refuta nuestra hipótesis inicial.
+
+#### Métrica vanidosa
+
+*   **Tasa de alumnos que vuelven a utilizar QuickMap en el siguiente cuatrimestre:** Esta métrica es vanidosa porque parecería indicar que si los alumnos vuelven a usar la herramienta es porque les sirve para determinar a que materias les conviene anotarse, pero la realidad es que esto no comprueba de ninguna manera que hoy en día exista opacidad o dificultar para conocer el camino crítico. Los alumnos por ejemplo podrían volver a utilizar la herramienta simplemente porque les gusta la interfaz o porque almacena el historial académico, pero no porque les ayude a tomar mejores decisiones.
