@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>QuickMap — Planificador Curricular y Camino Crítico (MVP)</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Encabezado de la aplicación -->
+  <header class="app-header">
+    <div class="brand-area">
+      <span class="brand-title">QuickMap</span>
+      <span class="brand-badge">MVP UNLaM</span>
+    </div>
+  </header>
+
+  <!-- PANTALLA 1: Selección de Carrera -->
+  <main id="screen-selection" class="screen active">
+    <div class="selection-card">
+      <div>
+        <h1 class="card-title">Elegí tu carrera</h1>
+        <p class="card-subtitle">Seleccioná tu plan de estudios para visualizar el mapa interactivo de correlatividades y conocer tu camino crítico.</p>
+      </div>
+
+      <div class="field-group">
+        <label for="career-select" class="field-label">Carreras disponibles</label>
+        <select id="career-select" class="select-field">
+          <option value="" disabled selected>-- Seleccionar carrera --</option>
+          <option value="Medicina">Medicina</option>
+          <option value="Nutricion">Licenciatura en nutrición</option>
+          <option value="Desarrollo_Web">Tecnicatura en desarrollo web</option>
+        </select>
+      </div>
+
+      <button id="btn-view-plan" class="btn btn-primary" disabled>
+        Ver plan de estudio
+      </button>
+    </div>
+  </main>
+
+  <!-- PANTALLA 2: Mapa de Correlatividades y Camino Crítico -->
+  <main id="screen-map" class="screen">
+    <!-- Barra superior de la carrera -->
+    <section class="map-toolbar">
+      <div class="career-info">
+        <button id="btn-change-career" class="btn" title="Volver a la selección de carreras">
+          ← Cambiar carrera
+        </button>
+        <h2 id="map-career-name" class="career-name">Plan de Estudio</h2>
+      </div>
+
+      <div class="toolbar-actions">
+        <button id="btn-reset" class="btn" title="Reiniciar materias aprobadas de la sesión">
+          Reiniciar
+        </button>
+        <button id="btn-save" class="btn btn-save" title="Guardar materias aprobadas y recalcular camino crítico">
+          Guardar
+        </button>
+      </div>
+    </section>
+
+    <!-- Barra de leyenda y métricas -->
+    <section class="legend-bar">
+      <div class="legend-items">
+        <div class="legend-item" title="Materias en la ruta crítica hacia la graduación">
+          <span class="swatch swatch-critica"></span>
+          <span>Camino crítico</span>
+        </div>
+        <div class="legend-item" title="Materias con todas sus correlativas cumplidas, listas para cursar">
+          <span class="swatch swatch-habilitada"></span>
+          <span>Habilitada para cursar</span>
+        </div>
+        <div class="legend-item" title="Materias aprobadas o promocionadas guardadas en la sesión">
+          <span class="swatch swatch-aprobada"></span>
+          <span>Aprobada / Promocionada (Grisada)</span>
+        </div>
+        <div class="legend-item" title="Materias que aún adeudan correlativas previas">
+          <span class="swatch swatch-bloqueada"></span>
+          <span>Bloqueada</span>
+        </div>
+      </div>
+
+      <div class="metrics-summary">
+        <span id="stat-approved" class="stat-pill">Aprobadas: 0/0</span>
+        <span id="stat-available" class="stat-pill highlight">Habilitadas: 0</span>
+        <span id="stat-critical" class="stat-pill highlight">En camino crítico: 0</span>
+      </div>
+    </section>
+
+    <!-- Visor interactivo del grafo (SVG) -->
+    <div id="map-viewport" class="map-viewport">
+      <svg id="map-svg" class="map-svg">
+        <defs>
+          <!-- Flecha neutral -->
+          <marker id="marker-neutral" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#8a877e" />
+          </marker>
+          <!-- Flecha crítica (roja) -->
+          <marker id="marker-critical" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#c62828" />
+          </marker>
+          <!-- Flecha aprobada (gris suave) -->
+          <marker id="marker-approved" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+            <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#a9a6a0" />
+          </marker>
+          <!-- Flecha resaltada entrante (azul) -->
+          <marker id="marker-highlight-in" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#1a2b6b" />
+          </marker>
+          <!-- Flecha resaltada saliente (verde) -->
+          <marker id="marker-highlight-out" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#2e7d32" />
+          </marker>
+        </defs>
+
+        <!-- Grupo transformable para Pan & Zoom -->
+        <g id="transform-group">
+          <g id="headers-layer"></g>
+          <g id="edges-layer"></g>
+          <g id="nodes-layer"></g>
+        </g>
+      </svg>
+
+      <!-- Controles de Zoom -->
+      <div class="zoom-controls">
+        <button id="btn-zoom-in" class="zoom-btn" title="Acercar mapa">+</button>
+        <button id="btn-zoom-out" class="zoom-btn" title="Alejar mapa">−</button>
+        <button id="btn-zoom-reset" class="zoom-btn" title="Ajustar y centrar vista" style="font-size:12px;">⊙</button>
+      </div>
+    </div>
+  </main>
+
+  <!-- Notificación Toast -->
+  <div id="toast-notice" class="toast-notice"></div>
+
+  <!-- Script principal como módulo ES6 -->
+  <script type="module" src="app.js"></script>
+</body>
+</html>

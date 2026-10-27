@@ -1,0 +1,157 @@
+{
+    "carrera": "Tecnicatura Universitaria en Web",
+    "materias": [
+        {
+            "id": "2619",
+            "nombre": "Programación Básica I",
+            "correlativas": []
+        },
+        {
+            "id": "2620",
+            "nombre": "Informática General",
+            "correlativas": []
+        },
+        {
+            "id": "2621",
+            "nombre": "Matemática General",
+            "correlativas": []
+        },
+        {
+            "id": "2622",
+            "nombre": "Inglés Técnico I",
+            "correlativas": []
+        },
+        {
+            "id": "2623",
+            "nombre": "Programación Básica II",
+            "correlativas": [
+                "2619"
+            ]
+        },
+        {
+            "id": "2624",
+            "nombre": "Programación Web I",
+            "correlativas": [
+                "2619",
+                "2620"
+            ]
+        },
+        {
+            "id": "2625",
+            "nombre": "Base de Datos I",
+            "correlativas": [
+                "2619",
+                "2620",
+                "2621"
+            ]
+        },
+        {
+            "id": "2626",
+            "nombre": "Introducción al Diseño Gráfico en la Web",
+            "correlativas": [
+                "2620"
+            ]
+        },
+        {
+            "id": "2627",
+            "nombre": "Inglés Técnico II",
+            "correlativas": [
+                "2622"
+            ]
+        },
+        {
+            "id": "2628",
+            "nombre": "Programación Web II",
+            "correlativas": [
+                "2623",
+                "2624",
+                "2625"
+            ]
+        },
+        {
+            "id": "2629",
+            "nombre": "Diseño de Aplicaciones Web",
+            "correlativas": [
+                "2623",
+                "2624",
+                "2625"
+            ]
+        },
+        {
+            "id": "2630",
+            "nombre": "Visualización e Interfaces",
+            "correlativas": [
+                "2624",
+                "2626"
+            ]
+        },
+        {
+            "id": "2631",
+            "nombre": "Taller Web I",
+            "correlativas": [
+                "2623",
+                "2624",
+                "2625"
+            ]
+        },
+        {
+            "id": "2632",
+            "nombre": "Base de Datos II",
+            "correlativas": [
+                "2625",
+                "2629"
+            ]
+        },
+        {
+            "id": "2633",
+            "nombre": "Programación Web III",
+            "correlativas": [
+                "2628",
+                "2629",
+                "2630"
+            ]
+        },
+        {
+            "id": "2634",
+            "nombre": "Tecnología de Redes",
+            "correlativas": [
+                "2630"
+            ]
+        },
+        {
+            "id": "2635",
+            "nombre": "Taller Web II",
+            "correlativas": [
+                "2631"
+            ]
+        },
+        {
+            "id": "2636",
+            "nombre": "Seguridad y Calidad en Aplicaciones Web",
+            "correlativas": [
+                "2628",
+                "2629"
+            ]
+        },
+        {
+            "id": "2637",
+            "nombre": "Introducción a la Administración de Proyectos",
+            "correlativas": [
+                "2632",
+                "2633",
+                "2634"
+            ]
+        },
+        {
+            "id": "2638",
+            "nombre": "Taller Práctico Integrador",
+            "correlativas": [
+                "2632",
+                "2633",
+                "2634",
+                "2635",
+                "2636"
+            ]
+        }
+    ]
+}

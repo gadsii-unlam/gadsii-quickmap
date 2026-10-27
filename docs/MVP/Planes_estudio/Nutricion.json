@@ -1,0 +1,488 @@
+{
+    "carrera": "Licenciatura en Nutrición",
+    "materias": [
+        {
+            "id": "01533",
+            "nombre": "Educación para la Salud",
+            "correlativas": []
+        },
+        {
+            "id": "01534",
+            "nombre": "Introducción al Pensamiento Científico",
+            "correlativas": []
+        },
+        {
+            "id": "01535",
+            "nombre": "Biofísica",
+            "correlativas": []
+        },
+        {
+            "id": "01536",
+            "nombre": "Relaciones Psicosociales",
+            "correlativas": []
+        },
+        {
+            "id": "01537",
+            "nombre": "Embriología y Desarrollo",
+            "correlativas": []
+        },
+        {
+            "id": "01538",
+            "nombre": "Nutrición del Niño y Adolescente Sano",
+            "correlativas": []
+        },
+        {
+            "id": "01530",
+            "nombre": "Anatomía Descriptiva y Topográfica",
+            "correlativas": []
+        },
+        {
+            "id": "01531",
+            "nombre": "Bioquímica",
+            "correlativas": []
+        },
+        {
+            "id": "01532",
+            "nombre": "Nutrición Normal",
+            "correlativas": []
+        },
+        {
+            "id": "00901",
+            "nombre": "Inglés Nivel I",
+            "correlativas": []
+        },
+        {
+            "id": "00911",
+            "nombre": "Computación Nivel I",
+            "correlativas": []
+        },
+        {
+            "id": "01541",
+            "nombre": "Psicología Social e Institucional",
+            "correlativas": [
+                "01533",
+                "01536",
+                "01537"
+            ]
+        },
+        {
+            "id": "01542",
+            "nombre": "Epidemiología",
+            "correlativas": [
+                "01534"
+            ]
+        },
+        {
+            "id": "01543",
+            "nombre": "Bromatología y Tecnología de los Alimentos",
+            "correlativas": [
+                "01531",
+                "01532"
+            ]
+        },
+        {
+            "id": "01544",
+            "nombre": "Atención Primaria para la Salud",
+            "correlativas": [
+                "01532",
+                "01533",
+                "01534",
+                "01536",
+                "01537",
+                "01538"
+            ]
+        },
+        {
+            "id": "01545",
+            "nombre": "Administración, Organización y Gestión de Servicios",
+            "correlativas": [
+                "01541"
+            ]
+        },
+        {
+            "id": "01539",
+            "nombre": "Fisiología",
+            "correlativas": [
+                "01530",
+                "01531",
+                "01535",
+                "01537"
+            ]
+        },
+        {
+            "id": "01540",
+            "nombre": "Técnicas y Manejo de Alimentos",
+            "correlativas": [
+                "01531",
+                "01532",
+                "01535"
+            ]
+        },
+        {
+            "id": "00902",
+            "nombre": "Inglés Nivel II",
+            "correlativas": [
+                "00901"
+            ]
+        },
+        {
+            "id": "00912",
+            "nombre": "Computación Nivel II",
+            "correlativas": [
+                "00911"
+            ]
+        },
+        {
+            "id": "01549",
+            "nombre": "Microbiología",
+            "correlativas": [
+                "01530",
+                "01531",
+                "01532",
+                "01533",
+                "01534",
+                "01535",
+                "01536",
+                "01537",
+                "01538",
+                "01539",
+                "01540",
+                "01543"
+            ]
+        },
+        {
+            "id": "01550",
+            "nombre": "Farmacología General",
+            "correlativas": [
+                "01530",
+                "01531",
+                "01532",
+                "01533",
+                "01534",
+                "01535",
+                "01536",
+                "01537",
+                "01538",
+                "01539"
+            ]
+        },
+        {
+            "id": "01551",
+            "nombre": "Fisiopatología y Dietoterapia del Niño y del Adolescente",
+            "correlativas": [
+                "01530",
+                "01531",
+                "01532",
+                "01533",
+                "01534",
+                "01535",
+                "01536",
+                "01537",
+                "01538",
+                "01539",
+                "01540"
+            ]
+        },
+        {
+            "id": "01552",
+            "nombre": "Antropología, Cultura y Nutrición",
+            "correlativas": [
+                "01530",
+                "01531",
+                "01532",
+                "01533",
+                "01534",
+                "01535",
+                "01536",
+                "01537",
+                "01538",
+                "01541",
+                "01544"
+            ]
+        },
+        {
+            "id": "01553",
+            "nombre": "Toxicología de los Alimentos",
+            "correlativas": [
+                "01530",
+                "01531",
+                "01532",
+                "01533",
+                "01534",
+                "01535",
+                "01536",
+                "01537",
+                "01538",
+                "01540",
+                "01543"
+            ]
+        },
+        {
+            "id": "01546",
+            "nombre": "Técnica Dietoterápica",
+            "correlativas": [
+                "01530",
+                "01531",
+                "01532",
+                "01533",
+                "01534",
+                "01535",
+                "01536",
+                "01537",
+                "01538",
+                "01539",
+                "01540",
+                "01543"
+            ]
+        },
+        {
+            "id": "01547",
+            "nombre": "Fisiopatología y Dietoterapia del Adulto",
+            "correlativas": [
+                "01530",
+                "01531",
+                "01532",
+                "01533",
+                "01534",
+                "01535",
+                "01536",
+                "01537",
+                "01538",
+                "01539",
+                "01540",
+                "01543"
+            ]
+        },
+        {
+            "id": "01548",
+            "nombre": "Atención Comunitaria I",
+            "correlativas": [
+                "01530",
+                "01531",
+                "01532",
+                "01533",
+                "01534",
+                "01535",
+                "01536",
+                "01537",
+                "01538",
+                "01539",
+                "01540",
+                "01543"
+            ]
+        },
+        {
+            "id": "01555",
+            "nombre": "Atención Comunitaria II",
+            "correlativas": [
+                "01545",
+                "01546",
+                "01547",
+                "01548"
+            ]
+        },
+        {
+            "id": "01556",
+            "nombre": "Metodología de la Investigación",
+            "correlativas": [
+                "01545",
+                "01546",
+                "01547",
+                "01548"
+            ]
+        },
+        {
+            "id": "01557",
+            "nombre": "Soporte Nutricional",
+            "correlativas": [
+                "01546",
+                "01547",
+                "01548"
+            ]
+        },
+        {
+            "id": "01558",
+            "nombre": "Historia Argentina y Latinoamericana de las Ciencias de la Salud",
+            "correlativas": [
+                "01546",
+                "01547",
+                "01548"
+            ]
+        },
+        {
+            "id": "01559",
+            "nombre": "Deontología",
+            "correlativas": [
+                "01545",
+                "01546",
+                "01547",
+                "01548"
+            ]
+        },
+        {
+            "id": "01560",
+            "nombre": "Política y Evaluación en Nutrición",
+            "correlativas": [
+                "01545",
+                "01546",
+                "01547",
+                "01548"
+            ]
+        },
+        {
+            "id": "01561",
+            "nombre": "Economía, Comercialización y Distribución de Alimentos",
+            "correlativas": [
+                "01545",
+                "01546",
+                "01547",
+                "01548"
+            ]
+        },
+        {
+            "id": "01562",
+            "nombre": "Técnicas Pedagógicas en Nutrición",
+            "correlativas": [
+                "01545",
+                "01546",
+                "01547",
+                "01548"
+            ]
+        },
+        {
+            "id": "01563",
+            "nombre": "Nutrición y Deporte",
+            "correlativas": [
+                "01545",
+                "01546",
+                "01547",
+                "01548"
+            ]
+        },
+        {
+            "id": "01564",
+            "nombre": "Marketing, Investigación y Desarrollo de Alimentos",
+            "correlativas": [
+                "01545",
+                "01546",
+                "01547",
+                "01548"
+            ]
+        },
+        {
+            "id": "01565",
+            "nombre": "Bioética y Ética Profesional",
+            "correlativas": [
+                "01559"
+            ]
+        },
+        {
+            "id": "01554",
+            "nombre": "Administración en Servicios de Alimentación",
+            "correlativas": [
+                "01545",
+                "01546",
+                "01547",
+                "01548"
+            ]
+        },
+        {
+            "id": "00903",
+            "nombre": "Inglés Nivel III",
+            "correlativas": [
+                "00902"
+            ]
+        },
+        {
+            "id": "01566",
+            "nombre": "Práctica Profesional en Servicios de Alimentación",
+            "correlativas": [
+                "01530",
+                "01531",
+                "01532",
+                "01533",
+                "01534",
+                "01535",
+                "01536",
+                "01537",
+                "01538",
+                "01539",
+                "01540",
+                "01541",
+                "01542",
+                "01543",
+                "01544",
+                "01545",
+                "01546",
+                "01547",
+                "01548",
+                "01549",
+                "01550",
+                "01551",
+                "01552",
+                "01553",
+                "01554",
+                "01555",
+                "01556",
+                "01557",
+                "01558",
+                "01559",
+                "01560",
+                "01561",
+                "01562",
+                "01563",
+                "01564",
+                "01565"
+            ]
+        },
+        {
+            "id": "01567",
+            "nombre": "Práctica Profesional en Nutrición Clínica",
+            "correlativas": [
+                "01530",
+                "01531",
+                "01532",
+                "01533",
+                "01534",
+                "01535",
+                "01536",
+                "01537",
+                "01538",
+                "01539",
+                "01540",
+                "01541",
+                "01542",
+                "01543",
+                "01544",
+                "01545",
+                "01546",
+                "01547",
+                "01548",
+                "01549",
+                "01550",
+                "01551",
+                "01552",
+                "01553",
+                "01554",
+                "01555",
+                "01556",
+                "01557",
+                "01558",
+                "01559",
+                "01560",
+                "01561",
+                "01562",
+                "01563",
+                "01564",
+                "01565"
+            ]
+        },
+        {
+            "id": "00904",
+            "nombre": "Inglés Nivel IV",
+            "correlativas": [
+                "00903"
+            ]
+        }
+    ]
+}
