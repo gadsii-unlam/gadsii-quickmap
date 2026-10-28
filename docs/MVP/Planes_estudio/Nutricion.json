@@ -4,61 +4,73 @@
         {
             "id": "01533",
             "nombre": "Educación para la Salud",
+            "anio": 1,
             "correlativas": []
         },
         {
             "id": "01534",
             "nombre": "Introducción al Pensamiento Científico",
+            "anio": 1,
             "correlativas": []
         },
         {
             "id": "01535",
             "nombre": "Biofísica",
+            "anio": 1,
             "correlativas": []
         },
         {
             "id": "01536",
             "nombre": "Relaciones Psicosociales",
+            "anio": 1,
             "correlativas": []
         },
         {
             "id": "01537",
             "nombre": "Embriología y Desarrollo",
+            "anio": 1,
             "correlativas": []
         },
         {
             "id": "01538",
             "nombre": "Nutrición del Niño y Adolescente Sano",
+            "anio": 1,
             "correlativas": []
         },
         {
             "id": "01530",
             "nombre": "Anatomía Descriptiva y Topográfica",
+            "anio": 1,
             "correlativas": []
         },
         {
             "id": "01531",
             "nombre": "Bioquímica",
+            "anio": 1,
             "correlativas": []
         },
         {
             "id": "01532",
             "nombre": "Nutrición Normal",
+            "anio": 1,
             "correlativas": []
         },
         {
             "id": "00901",
             "nombre": "Inglés Nivel I",
+            "anio": 1,
             "correlativas": []
         },
         {
             "id": "00911",
             "nombre": "Computación Nivel I",
+            "anio": 1,
             "correlativas": []
         },
         {
             "id": "01541",
             "nombre": "Psicología Social e Institucional",
+            "anio": 2,
             "correlativas": [
                 "01533",
                 "01536",
@@ -68,6 +80,7 @@
         {
             "id": "01542",
             "nombre": "Epidemiología",
+            "anio": 2,
             "correlativas": [
                 "01534"
             ]
@@ -75,6 +88,7 @@
         {
             "id": "01543",
             "nombre": "Bromatología y Tecnología de los Alimentos",
+            "anio": 2,
             "correlativas": [
                 "01531",
                 "01532"
@@ -83,6 +97,7 @@
         {
             "id": "01544",
             "nombre": "Atención Primaria para la Salud",
+            "anio": 2,
             "correlativas": [
                 "01532",
                 "01533",
@@ -95,6 +110,7 @@
         {
             "id": "01545",
             "nombre": "Administración, Organización y Gestión de Servicios",
+            "anio": 2,
             "correlativas": [
                 "01541"
             ]
@@ -102,6 +118,7 @@
         {
             "id": "01539",
             "nombre": "Fisiología",
+            "anio": 2,
             "correlativas": [
                 "01530",
                 "01531",
@@ -112,6 +129,7 @@
         {
             "id": "01540",
             "nombre": "Técnicas y Manejo de Alimentos",
+            "anio": 2,
             "correlativas": [
                 "01531",
                 "01532",
@@ -121,6 +139,7 @@
         {
             "id": "00902",
             "nombre": "Inglés Nivel II",
+            "anio": 2,
             "correlativas": [
                 "00901"
             ]
@@ -128,6 +147,7 @@
         {
             "id": "00912",
             "nombre": "Computación Nivel II",
+            "anio": 2,
             "correlativas": [
                 "00911"
             ]
@@ -135,6 +155,7 @@
         {
             "id": "01549",
             "nombre": "Microbiología",
+            "anio": 3,
             "correlativas": [
                 "01530",
                 "01531",
@@ -153,6 +174,7 @@
         {
             "id": "01550",
             "nombre": "Farmacología General",
+            "anio": 3,
             "correlativas": [
                 "01530",
                 "01531",
@@ -169,6 +191,7 @@
         {
             "id": "01551",
             "nombre": "Fisiopatología y Dietoterapia del Niño y del Adolescente",
+            "anio": 3,
             "correlativas": [
                 "01530",
                 "01531",
@@ -186,6 +209,7 @@
         {
             "id": "01552",
             "nombre": "Antropología, Cultura y Nutrición",
+            "anio": 3,
             "correlativas": [
                 "01530",
                 "01531",
@@ -203,6 +227,7 @@
         {
             "id": "01553",
             "nombre": "Toxicología de los Alimentos",
+            "anio": 3,
             "correlativas": [
                 "01530",
                 "01531",
@@ -220,6 +245,7 @@
         {
             "id": "01546",
             "nombre": "Técnica Dietoterápica",
+            "anio": 3,
             "correlativas": [
                 "01530",
                 "01531",
@@ -238,6 +264,7 @@
         {
             "id": "01547",
             "nombre": "Fisiopatología y Dietoterapia del Adulto",
+            "anio": 3,
             "correlativas": [
                 "01530",
                 "01531",
@@ -256,6 +283,7 @@
         {
             "id": "01548",
             "nombre": "Atención Comunitaria I",
+            "anio": 3,
             "correlativas": [
                 "01530",
                 "01531",
@@ -274,6 +302,7 @@
         {
             "id": "01555",
             "nombre": "Atención Comunitaria II",
+            "anio": 4,
             "correlativas": [
                 "01545",
                 "01546",
@@ -284,6 +313,7 @@
         {
             "id": "01556",
             "nombre": "Metodología de la Investigación",
+            "anio": 4,
             "correlativas": [
                 "01545",
                 "01546",
@@ -294,6 +324,7 @@
         {
             "id": "01557",
             "nombre": "Soporte Nutricional",
+            "anio": 4,
             "correlativas": [
                 "01546",
                 "01547",
@@ -303,6 +334,7 @@
         {
             "id": "01558",
             "nombre": "Historia Argentina y Latinoamericana de las Ciencias de la Salud",
+            "anio": 4,
             "correlativas": [
                 "01546",
                 "01547",
@@ -312,6 +344,7 @@
         {
             "id": "01559",
             "nombre": "Deontología",
+            "anio": 4,
             "correlativas": [
                 "01545",
                 "01546",
@@ -322,6 +355,7 @@
         {
             "id": "01560",
             "nombre": "Política y Evaluación en Nutrición",
+            "anio": 4,
             "correlativas": [
                 "01545",
                 "01546",
@@ -332,6 +366,7 @@
         {
             "id": "01561",
             "nombre": "Economía, Comercialización y Distribución de Alimentos",
+            "anio": 4,
             "correlativas": [
                 "01545",
                 "01546",
@@ -342,6 +377,7 @@
         {
             "id": "01562",
             "nombre": "Técnicas Pedagógicas en Nutrición",
+            "anio": 4,
             "correlativas": [
                 "01545",
                 "01546",
@@ -352,6 +388,7 @@
         {
             "id": "01563",
             "nombre": "Nutrición y Deporte",
+            "anio": 4,
             "correlativas": [
                 "01545",
                 "01546",
@@ -362,6 +399,7 @@
         {
             "id": "01564",
             "nombre": "Marketing, Investigación y Desarrollo de Alimentos",
+            "anio": 4,
             "correlativas": [
                 "01545",
                 "01546",
@@ -372,6 +410,7 @@
         {
             "id": "01565",
             "nombre": "Bioética y Ética Profesional",
+            "anio": 4,
             "correlativas": [
                 "01559"
             ]
@@ -379,6 +418,7 @@
         {
             "id": "01554",
             "nombre": "Administración en Servicios de Alimentación",
+            "anio": 4,
             "correlativas": [
                 "01545",
                 "01546",
@@ -389,6 +429,7 @@
         {
             "id": "00903",
             "nombre": "Inglés Nivel III",
+            "anio": 4,
             "correlativas": [
                 "00902"
             ]
@@ -396,6 +437,7 @@
         {
             "id": "01566",
             "nombre": "Práctica Profesional en Servicios de Alimentación",
+            "anio": 5,
             "correlativas": [
                 "01530",
                 "01531",
@@ -438,6 +480,7 @@
         {
             "id": "01567",
             "nombre": "Práctica Profesional en Nutrición Clínica",
+            "anio": 5,
             "correlativas": [
                 "01530",
                 "01531",
@@ -480,6 +523,7 @@
         {
             "id": "00904",
             "nombre": "Inglés Nivel IV",
+            "anio": 5,
             "correlativas": [
                 "00903"
             ]

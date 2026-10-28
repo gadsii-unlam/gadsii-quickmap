@@ -21,6 +21,7 @@ export class CurriculumGraph {
     this.successors = new Map();
     this.predecessors = new Map();
     this.levels = new Map();
+    this.years = new Map();
     
     this._buildGraph();
     this._computeTopologicalLevels();
@@ -31,11 +32,14 @@ export class CurriculumGraph {
    */
   _buildGraph() {
     this.rawMaterias.forEach(m => {
+      const anioNum = Number(m.anio) || 1;
       this.nodes.set(m.id, {
         id: String(m.id),
         nombre: m.nombre,
+        anio: anioNum,
         correlativas: m.correlativas.map(String)
       });
+      this.years.set(String(m.id), anioNum);
       this.successors.set(String(m.id), []);
       this.predecessors.set(String(m.id), m.correlativas.map(String));
     });
@@ -86,6 +90,17 @@ export class CurriculumGraph {
     let max = 0;
     this.levels.forEach(lvl => {
       if (lvl > max) max = lvl;
+    });
+    return max;
+  }
+
+  /**
+   * Obtiene la cantidad total de años de la carrera.
+   */
+  getMaxYear() {
+    let max = 1;
+    this.years.forEach(y => {
+      if (y > max) max = y;
     });
     return max;
   }

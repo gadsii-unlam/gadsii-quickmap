@@ -38,6 +38,7 @@ const state = {
   savedApproved: new Set(),    // Materias guardadas en sessionStorage
   pendingApproved: new Set(),  // Materias seleccionadas temporalmente antes de guardar
   nodePositions: new Map(),
+  yearLayout: new Map(),       // Posicionamiento y dimensiones de cada columna de año
   
   // Transformación de la vista del mapa (Pan & Zoom)
   view: {
@@ -50,12 +51,13 @@ const state = {
   }
 };
 
-// Constantes de diseño para el grafo
+// Constantes de diseño para el grafo (Req 4: mayor separación espacial entre nodos)
 const LAYOUT = {
-  nodeWidth: 220,
-  nodeHeight: 76,
-  columnGap: 120,
-  rowGap: 24,
+  nodeWidth: 210,
+  nodeHeight: 68,
+  rowGap: 40,        // Mayor separación vertical entre nodos (Req 4)
+  subColGap: 80,     // Separación entre sub-columnas del mismo año (Req 9)
+  yearGap: 130,      // Separación entre años de cursada (Req 4)
   paddingLeft: 60,
   paddingTop: 80
 };
@@ -204,55 +206,92 @@ async function fetchCareerPlan(careerKey) {
 }
 
 /**
- * Calcula la posición de cada materia en el mapa (Topological Barycenter Layout)
+ * Calcula la posición de cada materia agrupada de forma vertical por año de la carrera
+ * Req 9: En el caso de materias que desbloquean materias del mismo año, se posicionan
+ * aquellas que desbloquean a la izquierda (subCol 0) y las desbloqueadas a la derecha (subCol 1),
+ * manteniendo la agrupación visual del mismo año.
  */
 function calculateNodeLayout() {
   state.nodePositions.clear();
+  state.yearLayout.clear();
   const graph = state.graph;
-  const maxLvl = graph.getMaxLevel();
+  const maxYear = graph.getMaxYear();
 
-  // Agrupar materias por nivel topológico
-  const byLevel = [];
-  for (let i = 0; i <= maxLvl; i++) byLevel.push([]);
+  // Agrupar materias por año
+  const byYear = new Map();
+  for (let y = 1; y <= maxYear; y++) {
+    byYear.set(y, []);
+  }
 
   graph.nodes.forEach((node, id) => {
-    const lvl = graph.levels.get(id) || 0;
-    byLevel[lvl].push(id);
+    const y = node.anio || 1;
+    if (!byYear.has(y)) byYear.set(y, []);
+    byYear.get(y).push(id);
   });
 
-  // Ordenamiento de baricentro para minimizar cruces de aristas
-  const orderIndex = new Map();
-  byLevel.forEach((levelNodes, lvl) => {
-    if (lvl > 0) {
-      levelNodes.sort((aId, bId) => {
-        const getAvgPrereqPos = (id) => {
-          const prereqs = graph.nodes.get(id).correlativas;
-          if (prereqs.length === 0) return 0;
-          let sum = 0;
-          let count = 0;
-          prereqs.forEach(pId => {
-            if (orderIndex.has(pId)) {
-              sum += orderIndex.get(pId);
-              count++;
-            }
-          });
-          return count > 0 ? sum / count : 0;
-        };
-        return getAvgPrereqPos(aId) - getAvgPrereqPos(bId);
+  let currentX = LAYOUT.paddingLeft;
+
+  for (let year = 1; year <= maxYear; year++) {
+    const yearNodes = byYear.get(year) || [];
+    if (yearNodes.length === 0) continue;
+
+    // Sub-col 0: Materias sin correlativas dentro del mismo año (van más a la izquierda)
+    // Sub-col 1: Materias que dependen de otra del mismo año (van a la derecha)
+    const subCol0 = [];
+    const subCol1 = [];
+
+    yearNodes.forEach(id => {
+      const node = graph.nodes.get(id);
+      const sameYearPrereqs = (node.correlativas || []).filter(cId => {
+        const pNode = graph.nodes.get(cId);
+        return pNode && (pNode.anio || 1) === year;
       });
-    }
 
-    levelNodes.forEach((id, row) => {
-      orderIndex.set(id, row);
-      const x = LAYOUT.paddingLeft + lvl * (LAYOUT.nodeWidth + LAYOUT.columnGap);
-      const y = LAYOUT.paddingTop + row * (LAYOUT.nodeHeight + LAYOUT.rowGap);
-      state.nodePositions.set(id, { x, y, lvl, row });
+      if (sameYearPrereqs.length === 0) {
+        subCol0.push(id);
+      } else {
+        subCol1.push(id);
+      }
     });
-  });
+
+    // Ordenar de manera estable por ID numérico
+    subCol0.sort((a, b) => Number(a) - Number(b));
+    subCol1.sort((a, b) => Number(a) - Number(b));
+
+    const hasSubCol1 = subCol1.length > 0;
+    const yearWidth = hasSubCol1 ? (LAYOUT.nodeWidth * 2 + LAYOUT.subColGap) : LAYOUT.nodeWidth;
+    const subCol0_X = currentX;
+    const subCol1_X = currentX + LAYOUT.nodeWidth + LAYOUT.subColGap;
+    const headerX = currentX + yearWidth / 2;
+
+    subCol0.forEach((id, row) => {
+      const x = subCol0_X;
+      const y = LAYOUT.paddingTop + row * (LAYOUT.nodeHeight + LAYOUT.rowGap);
+      state.nodePositions.set(id, { x, y, year, subCol: 0, row });
+    });
+
+    subCol1.forEach((id, row) => {
+      const x = subCol1_X;
+      const y = LAYOUT.paddingTop + row * (LAYOUT.nodeHeight + LAYOUT.rowGap);
+      state.nodePositions.set(id, { x, y, year, subCol: 1, row });
+    });
+
+    const maxRowsInYear = Math.max(subCol0.length, subCol1.length);
+    const yearHeight = maxRowsInYear * LAYOUT.nodeHeight + Math.max(0, maxRowsInYear - 1) * LAYOUT.rowGap;
+
+    state.yearLayout.set(year, {
+      startX: currentX,
+      width: yearWidth,
+      headerX,
+      maxHeight: yearHeight
+    });
+
+    currentX += yearWidth + LAYOUT.yearGap;
+  }
 }
 
 /**
- * Renderiza el mapa completo (cabeceras, aristas y nodos)
+ * Renderiza el mapa completo (cabeceras por año, aristas direccionadas y nodos)
  */
 function renderMap() {
   dom.headersLayer.innerHTML = '';
@@ -261,20 +300,33 @@ function renderMap() {
 
   const graph = state.graph;
   const cpm = state.cpmResult;
-  const maxLvl = graph.getMaxLevel();
+  const maxYear = graph.getMaxYear();
 
-  // 1. Renderizar cabeceras de columnas
-  for (let lvl = 0; lvl <= maxLvl; lvl++) {
-    const colX = LAYOUT.paddingLeft + lvl * (LAYOUT.nodeWidth + LAYOUT.columnGap) + LAYOUT.nodeWidth / 2;
+  // 1. Renderizar cabeceras de columnas y agrupación visual del año (Req 9)
+  for (let year = 1; year <= maxYear; year++) {
+    const yInfo = state.yearLayout.get(year);
+    if (!yInfo) continue;
+
+    // Caja de agrupación que abarca todo el año
+    const yearBox = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+    yearBox.setAttribute('x', yInfo.startX - 14);
+    yearBox.setAttribute('y', LAYOUT.paddingTop - 18);
+    yearBox.setAttribute('width', yInfo.width + 28);
+    yearBox.setAttribute('height', yInfo.maxHeight + 36);
+    yearBox.setAttribute('rx', '8');
+    yearBox.setAttribute('class', 'year-group-box');
+    dom.headersLayer.appendChild(yearBox);
+
+    // Texto de cabecera centrado sobre la agrupación del año
     const headerText = document.createElementNS('http://www.w3.org/2000/svg', 'text');
-    headerText.setAttribute('x', colX);
+    headerText.setAttribute('x', yInfo.headerX);
     headerText.setAttribute('y', LAYOUT.paddingTop - 28);
     headerText.setAttribute('class', 'column-header');
-    headerText.textContent = `Nivel ${lvl + 1}`;
+    headerText.textContent = `${year}° Año`;
     dom.headersLayer.appendChild(headerText);
   }
 
-  // 2. Renderizar aristas (flechas de correlatividad)
+  // 2. Renderizar aristas (flechas con puntas más pequeñas apuntando a las materias que desbloquea)
   graph.nodes.forEach((node, uId) => {
     const succs = graph.successors.get(uId) || [];
     const uPos = state.nodePositions.get(uId);
@@ -285,18 +337,7 @@ function renderMap() {
 
       const edgeKey = `${uId}->${vId}`;
       const isCriticalEdge = cpm.criticalEdges.has(edgeKey);
-      const isApprovedEdge = state.savedApproved.has(uId) && state.savedApproved.has(vId);
-
-      // Puntos de inicio y fin (lado derecho del prerequisito -> lado izquierdo del dependiente)
-      const x1 = uPos.x + LAYOUT.nodeWidth;
-      const y1 = uPos.y + LAYOUT.nodeHeight / 2;
-      const x2 = vPos.x;
-      const y2 = vPos.y + LAYOUT.nodeHeight / 2;
-      const dx = (x2 - x1) / 2;
-
-      const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-      const d = `M ${x1} ${y1} C ${x1 + dx} ${y1}, ${x2 - dx} ${y2}, ${x2} ${y2}`;
-      path.setAttribute('d', d);
+      const isApprovedEdge = state.pendingApproved.has(uId) && state.pendingApproved.has(vId);
 
       let edgeClass = 'edge-path';
       let markerId = 'marker-neutral';
@@ -309,6 +350,17 @@ function renderMap() {
         markerId = 'marker-approved';
       }
 
+      const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+
+      // Gracias al sub-posicionamiento dentro del mismo año y entre años, u siempre está a la izquierda de v (uPos.x < vPos.x)
+      const x1 = uPos.x + LAYOUT.nodeWidth;
+      const y1 = uPos.y + LAYOUT.nodeHeight / 2;
+      const x2 = vPos.x - 3; // 3px antes para que la punta de la flecha toque con precisión
+      const y2 = vPos.y + LAYOUT.nodeHeight / 2;
+      const dx = Math.max((x2 - x1) * 0.45, 25);
+
+      const d = `M ${x1} ${y1} C ${x1 + dx} ${y1}, ${x2 - dx} ${y2}, ${x2} ${y2}`;
+      path.setAttribute('d', d);
       path.setAttribute('class', edgeClass);
       path.setAttribute('marker-end', `url(#${markerId})`);
       path.setAttribute('data-edge', edgeKey);
@@ -319,16 +371,16 @@ function renderMap() {
     });
   });
 
-  // 3. Renderizar nodos (cards de materias)
+  // 3. Renderizar nodos (cards con fondo blanco, colores por estado, símbolo sólo superior derecha)
   graph.nodes.forEach((node, id) => {
     const pos = state.nodePositions.get(id);
     if (!pos) return;
 
-    const statusObj = cpm.nodeStatus.get(id) || { status: 'bloqueada' };
+    const statusObj = cpm.nodeStatus.get(id) || { status: 'bloqueada', isAvailable: false, isCritical: false, isApproved: false };
+    const isApproved = state.pendingApproved.has(id);
     const isSavedApproved = state.savedApproved.has(id);
-    const isPending = state.pendingApproved.has(id);
 
-    // Contenedor ForeignObject para layout HTML rico y accesible
+    // Contenedor ForeignObject
     const fo = document.createElementNS('http://www.w3.org/2000/svg', 'foreignObject');
     fo.setAttribute('x', pos.x);
     fo.setAttribute('y', pos.y);
@@ -336,15 +388,35 @@ function renderMap() {
     fo.setAttribute('height', LAYOUT.nodeHeight);
     fo.setAttribute('data-id', id);
 
-    const card = document.createElement('div');
-    let cardClass = `node-card status-${statusObj.status}`;
-    if (isPending !== isSavedApproved) {
-      cardClass += ' pending-selection';
+    let symbol = '🔒';
+    let cardClass = 'node-card status-bloqueada';
+
+    if (isApproved) {
+      // Req 1: Materias aprobadas o promocionadas: fondo blanco, borde y letra verde, símbolo ✓
+      symbol = '✓';
+      cardClass = 'node-card status-aprobada';
+      if (!isSavedApproved) {
+        cardClass += ' pending-selection';
+      }
+    } else if (statusObj.isCritical) {
+      // Req 2: Materias críticas: fondo blanco, borde y letras rojo
+      cardClass = 'node-card status-critica';
+      symbol = statusObj.isAvailable ? '○' : '🔒';
+    } else if (statusObj.isAvailable) {
+      // Habilitada disponible: fondo blanco, borde azul, símbolo ○
+      cardClass = 'node-card status-habilitada';
+      symbol = '○';
+    } else {
+      // Bloqueada: fondo opaco #d8d5cb, borde gris, símbolo 🔒
+      cardClass = 'node-card status-bloqueada';
+      symbol = '🔒';
     }
+
+    const card = document.createElement('div');
     card.className = cardClass;
     card.setAttribute('data-node-id', id);
 
-    // Fila superior: ID y Checkbox de aprobación
+    // Fila superior: ID a la izquierda, Símbolo a la derecha (Req 3: sin tildes interactivos en este sector)
     const topRow = document.createElement('div');
     topRow.className = 'node-top-row';
 
@@ -352,49 +424,23 @@ function renderMap() {
     idSpan.className = 'node-id';
     idSpan.textContent = `#${id}`;
 
-    const chk = document.createElement('input');
-    chk.type = 'checkbox';
-    chk.className = 'node-checkbox';
-    chk.checked = isPending;
-    chk.title = 'Marcar como aprobada / promocionada';
-    chk.addEventListener('click', (e) => {
-      e.stopPropagation();
-      toggleNodeSelection(id);
-    });
+    const symbolSpan = document.createElement('span');
+    symbolSpan.className = 'node-symbol';
+    symbolSpan.textContent = symbol;
 
     topRow.appendChild(idSpan);
-    topRow.appendChild(chk);
+    topRow.appendChild(symbolSpan);
 
-    // Fila central: Nombre de la materia
+    // Fila central: Nombre de la materia (Req 8: debajo del nombre no debe verse el estado)
     const nameDiv = document.createElement('div');
     nameDiv.className = 'node-name';
     nameDiv.textContent = node.nombre;
     nameDiv.title = node.nombre;
 
-    // Fila inferior: Etiqueta de estado
-    const bottomRow = document.createElement('div');
-    bottomRow.className = 'node-bottom-row';
-
-    const tag = document.createElement('span');
-    tag.className = `status-tag tag-${statusObj.status}`;
-    
-    if (statusObj.status === 'aprobada') {
-      tag.textContent = '✓ Aprobada';
-    } else if (statusObj.status === 'critica') {
-      tag.textContent = statusObj.isAvailable ? 'Crítica • Habilitada' : 'Camino crítico';
-    } else if (statusObj.status === 'habilitada') {
-      tag.textContent = 'Habilitada';
-    } else {
-      tag.textContent = 'Bloqueada';
-    }
-
-    bottomRow.appendChild(tag);
-
     card.appendChild(topRow);
     card.appendChild(nameDiv);
-    card.appendChild(bottomRow);
 
-    // Eventos del nodo
+    // Evento de clic en la tarjeta para alternar aprobación
     card.addEventListener('click', () => {
       toggleNodeSelection(id);
     });
@@ -409,30 +455,74 @@ function renderMap() {
 
 /**
  * Alterna la selección de una materia como aprobada
+ * Req 6: No debe dejar seleccionar una materia como aprobada a menos que todas las materias
+ * anteriores que la desbloquean hayan sido marcadas como aprobadas previamente.
  */
 function toggleNodeSelection(id) {
+  const node = state.graph.nodes.get(id);
+  if (!node) return;
+
   if (state.pendingApproved.has(id)) {
-    state.pendingApproved.delete(id);
+    // Si ya estaba marcada, desmarcarla junto a cualquier dependiente
+    unmarkWithDependents(id);
   } else {
+    // Verificar si todas las correlativas previas que la desbloquean están aprobadas (Req 6)
+    const missingPrereqs = (node.correlativas || []).filter(cId => !state.pendingApproved.has(cId));
+    if (missingPrereqs.length > 0) {
+      const missingNames = missingPrereqs.map(cId => {
+        const pNode = state.graph.nodes.get(cId);
+        return pNode ? pNode.nombre : `#${cId}`;
+      }).join(', ');
+
+      showToast(`No podés marcar "${node.nombre}". Primero debés aprobar: ${missingNames}`);
+
+      // Animación de rechazo en la tarjeta
+      const card = document.querySelector(`.node-card[data-node-id="${id}"]`);
+      if (card) {
+        card.classList.remove('shake-error');
+        void card.offsetWidth; // Forzar reflow
+        card.classList.add('shake-error');
+      }
+      return;
+    }
+
+    // Cumple todas las correlativas previas: marcar como aprobada
     state.pendingApproved.add(id);
   }
 
-  // Actualizar visualmente la tarjeta del nodo sin redibujar todo
-  const card = document.querySelector(`.node-card[data-node-id="${id}"]`);
-  if (card) {
-    const chk = card.querySelector('.node-checkbox');
-    const isPending = state.pendingApproved.has(id);
-    const isSaved = state.savedApproved.has(id);
-    chk.checked = isPending;
-
-    if (isPending !== isSaved) {
-      card.classList.add('pending-selection');
-    } else {
-      card.classList.remove('pending-selection');
-    }
-  }
-
+  renderMap();
+  updateMetrics();
   updateSaveButtonState();
+}
+
+/**
+ * Desmarca una materia y, en cascada, cualquier materia dependiente marcada en pendingApproved
+ */
+function unmarkWithDependents(id) {
+  state.pendingApproved.delete(id);
+
+  const removedDependents = [];
+  const checkDependents = (uId) => {
+    const succs = state.graph.successors.get(uId) || [];
+    succs.forEach(vId => {
+      if (state.pendingApproved.has(vId)) {
+        state.pendingApproved.delete(vId);
+        removedDependents.push(vId);
+        checkDependents(vId);
+      }
+    });
+  };
+
+  checkDependents(id);
+
+  if (removedDependents.length > 0) {
+    const names = removedDependents.map(dId => {
+      const pNode = state.graph.nodes.get(dId);
+      return pNode ? pNode.nombre : `#${dId}`;
+    }).join(', ');
+    const baseName = state.graph.nodes.get(id)?.nombre || `#${id}`;
+    showToast(`Se desmarcó "${baseName}" y también sus correlativas dependientes: ${names}`);
+  }
 }
 
 /**
@@ -630,11 +720,18 @@ function applyTransform() {
  */
 function centerView() {
   const vpRect = dom.mapViewport.getBoundingClientRect();
-  const maxLvl = state.graph ? state.graph.getMaxLevel() : 4;
-  const contentWidth = LAYOUT.paddingLeft * 2 + (maxLvl + 1) * (LAYOUT.nodeWidth + LAYOUT.columnGap);
-  
+  let totalWidth = LAYOUT.paddingLeft * 2;
+  if (state.yearLayout && state.yearLayout.size > 0) {
+    state.yearLayout.forEach(yInfo => {
+      totalWidth += yInfo.width + LAYOUT.yearGap;
+    });
+  } else {
+    const maxYear = state.graph ? state.graph.getMaxYear() : 4;
+    totalWidth += maxYear * (LAYOUT.nodeWidth + LAYOUT.yearGap);
+  }
+
   // Escala inicial calculada para que se aprecie la mayor parte del grafo
-  const targetScale = Math.min(Math.max(vpRect.width / (contentWidth * 1.05), 0.55), 0.95);
+  const targetScale = Math.min(Math.max(vpRect.width / (totalWidth * 1.05), 0.45), 0.95);
   state.view.scale = targetScale;
   state.view.panX = 30;
   state.view.panY = 20;
@@ -657,10 +754,12 @@ function switchScreen(screenName) {
 }
 
 /**
- * Verifica si había una carrera activa guardada en la sesión
+ * Verifica si había una carrera activa guardada en la sesión o indicada en la URL
  */
 function checkSessionCareer() {
-  const activeCareer = sessionStorage.getItem('quickmap_active_career');
+  const urlParams = new URLSearchParams(window.location.search);
+  const careerParam = urlParams.get('carrera');
+  const activeCareer = (careerParam && CAREER_CONFIG[careerParam]) ? careerParam : sessionStorage.getItem('quickmap_active_career');
   if (activeCareer && CAREER_CONFIG[activeCareer]) {
     dom.careerSelect.value = activeCareer;
     dom.btnViewPlan.disabled = false;

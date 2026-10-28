@@ -48,7 +48,10 @@
         <button id="btn-change-career" class="btn" title="Volver a la selección de carreras">
           ← Cambiar carrera
         </button>
-        <h2 id="map-career-name" class="career-name">Plan de Estudio</h2>
+        <div class="career-title-container">
+          <span class="career-subtitle-label">Plan de estudio</span>
+          <h1 id="map-career-name" class="career-main-title">Carrera Seleccionada</h1>
+        </div>
       </div>
 
       <div class="toolbar-actions">
@@ -64,21 +67,21 @@
     <!-- Barra de leyenda y métricas -->
     <section class="legend-bar">
       <div class="legend-items">
-        <div class="legend-item" title="Materias en la ruta crítica hacia la graduación">
+        <div class="legend-item legend-critica" title="Materias en la ruta crítica hacia la graduación">
           <span class="swatch swatch-critica"></span>
           <span>Camino crítico</span>
         </div>
-        <div class="legend-item" title="Materias con todas sus correlativas cumplidas, listas para cursar">
+        <div class="legend-item legend-habilitada" title="Materias con todas sus correlativas cumplidas, listas para cursar">
           <span class="swatch swatch-habilitada"></span>
-          <span>Habilitada para cursar</span>
+          <span>Disponible para cursar <span class="legend-symbol">○</span></span>
         </div>
-        <div class="legend-item" title="Materias aprobadas o promocionadas guardadas en la sesión">
-          <span class="swatch swatch-aprobada"></span>
-          <span>Aprobada / Promocionada (Grisada)</span>
-        </div>
-        <div class="legend-item" title="Materias que aún adeudan correlativas previas">
+        <div class="legend-item legend-bloqueada" title="Materias que aún adeudan correlativas previas">
           <span class="swatch swatch-bloqueada"></span>
-          <span>Bloqueada</span>
+          <span>Bloqueada <span class="legend-symbol">🔒</span></span>
+        </div>
+        <div class="legend-item legend-aprobada" title="Materias aprobadas o promocionadas">
+          <span class="swatch swatch-aprobada"></span>
+          <span>Aprobada / Promocionada <span class="legend-symbol">✓</span></span>
         </div>
       </div>
 
@@ -91,27 +94,27 @@
 
     <!-- Visor interactivo del grafo (SVG) -->
     <div id="map-viewport" class="map-viewport">
-      <svg id="map-svg" class="map-svg">
+      <svg id="map-svg" class="map-svg" width="100%" height="100%">
         <defs>
           <!-- Flecha neutral -->
-          <marker id="marker-neutral" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-            <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#8a877e" />
+          <marker id="marker-neutral" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="5" markerHeight="5" orient="auto">
+            <path d="M 0 1 L 7 4 L 0 7 z" fill="#8a877e" />
           </marker>
           <!-- Flecha crítica (roja) -->
-          <marker id="marker-critical" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-            <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#c62828" />
+          <marker id="marker-critical" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="5" markerHeight="5" orient="auto">
+            <path d="M 0 1 L 7 4 L 0 7 z" fill="#c62828" />
           </marker>
-          <!-- Flecha aprobada (gris suave) -->
-          <marker id="marker-approved" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
-            <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#a9a6a0" />
+          <!-- Flecha aprobada (verde suave) -->
+          <marker id="marker-approved" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="4.5" markerHeight="4.5" orient="auto">
+            <path d="M 0 1 L 7 4 L 0 7 z" fill="#2e7d32" />
           </marker>
           <!-- Flecha resaltada entrante (azul) -->
-          <marker id="marker-highlight-in" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-            <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#1a2b6b" />
+          <marker id="marker-highlight-in" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="5.5" markerHeight="5.5" orient="auto">
+            <path d="M 0 1 L 7 4 L 0 7 z" fill="#1a2b6b" />
           </marker>
           <!-- Flecha resaltada saliente (verde) -->
-          <marker id="marker-highlight-out" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-            <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#2e7d32" />
+          <marker id="marker-highlight-out" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="5.5" markerHeight="5.5" orient="auto">
+            <path d="M 0 1 L 7 4 L 0 7 z" fill="#2e7d32" />
           </marker>
         </defs>
 

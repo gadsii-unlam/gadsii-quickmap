@@ -4,41 +4,49 @@
         {
             "id": "03242",
             "nombre": "Psicología y Relación Médico Paciente",
+            "anio": 1,
             "correlativas": []
         },
         {
             "id": "00901",
             "nombre": "Inglés Nivel I",
+            "anio": 1,
             "correlativas": []
         },
         {
             "id": "03243",
             "nombre": "Promoción Intercultural de la Salud y Ambiente",
+            "anio": 1,
             "correlativas": []
         },
         {
             "id": "03261",
             "nombre": "Integradora Básica I",
+            "anio": 1,
             "correlativas": []
         },
         {
             "id": "03262",
             "nombre": "Integradora Básica II",
+            "anio": 1,
             "correlativas": []
         },
         {
             "id": "03240",
             "nombre": "Formación del Ser Humano",
+            "anio": 1,
             "correlativas": []
         },
         {
             "id": "03241",
             "nombre": "Articulación Básico Clínica I",
+            "anio": 1,
             "correlativas": []
         },
         {
             "id": "00902",
             "nombre": "Inglés Nivel II",
+            "anio": 2,
             "correlativas": [
                 "00901"
             ]
@@ -46,6 +54,7 @@
         {
             "id": "03247",
             "nombre": "Epidemiología e Investigación en Salud",
+            "anio": 2,
             "correlativas": [
                 "03243"
             ]
@@ -53,6 +62,7 @@
         {
             "id": "03263",
             "nombre": "Integradora Salud Pública I",
+            "anio": 2,
             "correlativas": [
                 "03261",
                 "03262"
@@ -61,6 +71,7 @@
         {
             "id": "03264",
             "nombre": "Integradora Salud Pública II",
+            "anio": 2,
             "correlativas": [
                 "03261",
                 "03262"
@@ -69,6 +80,7 @@
         {
             "id": "00903",
             "nombre": "Inglés Nivel III",
+            "anio": 2,
             "correlativas": [
                 "00902"
             ]
@@ -76,6 +88,7 @@
         {
             "id": "03244",
             "nombre": "Nacimiento, Crecimiento y Desarrollo",
+            "anio": 2,
             "correlativas": [
                 "03240",
                 "03241"
@@ -84,6 +97,7 @@
         {
             "id": "03245",
             "nombre": "Articulación Básico Clínica II",
+            "anio": 2,
             "correlativas": [
                 "03240",
                 "03241"
@@ -92,6 +106,7 @@
         {
             "id": "03246",
             "nombre": "Agentes, Mecanismos de Defensa y Nutrición",
+            "anio": 2,
             "correlativas": [
                 "03240",
                 "03241"
@@ -100,6 +115,7 @@
         {
             "id": "00904",
             "nombre": "Inglés Nivel IV",
+            "anio": 3,
             "correlativas": [
                 "00903"
             ]
@@ -107,6 +123,7 @@
         {
             "id": "03249",
             "nombre": "Farmacología I. Bases Fisiopatológicas del Tratamiento",
+            "anio": 3,
             "correlativas": [
                 "03245",
                 "03246"
@@ -115,11 +132,13 @@
         {
             "id": "00911",
             "nombre": "Computación Nivel I",
+            "anio": 3,
             "correlativas": []
         },
         {
             "id": "03251",
             "nombre": "Gestión de Redes y Servicios de Salud",
+            "anio": 3,
             "correlativas": [
                 "03247"
             ]
@@ -127,6 +146,7 @@
         {
             "id": "03248",
             "nombre": "Articulación Básico Clínica III",
+            "anio": 3,
             "correlativas": [
                 "03245",
                 "03246"
@@ -135,6 +155,7 @@
         {
             "id": "03250",
             "nombre": "Salud Integral de la Mujer",
+            "anio": 3,
             "correlativas": [
                 "03244",
                 "03245",
@@ -144,6 +165,7 @@
         {
             "id": "00912",
             "nombre": "Computación Nivel II",
+            "anio": 4,
             "correlativas": [
                 "00911"
             ]
@@ -151,6 +173,7 @@
         {
             "id": "03254",
             "nombre": "Farmacología II. Clínica y Terapéutica",
+            "anio": 4,
             "correlativas": [
                 "03248",
                 "03249"
@@ -159,6 +182,7 @@
         {
             "id": "03255",
             "nombre": "Medicina General",
+            "anio": 4,
             "correlativas": [
                 "03248"
             ]
@@ -166,6 +190,7 @@
         {
             "id": "03265",
             "nombre": "Integradora Clínica I",
+            "anio": 4,
             "correlativas": [
                 "03249",
                 "03261",
@@ -177,6 +202,7 @@
         {
             "id": "03266",
             "nombre": "Integradora Clínica II",
+            "anio": 4,
             "correlativas": [
                 "03251",
                 "03261",
@@ -188,6 +214,7 @@
         {
             "id": "03256",
             "nombre": "Salud Mental",
+            "anio": 4,
             "correlativas": [
                 "03242",
                 "03248",
@@ -197,6 +224,7 @@
         {
             "id": "03252",
             "nombre": "Salud del Niño, Niña y Adolescente",
+            "anio": 4,
             "correlativas": [
                 "03244",
                 "03248",
@@ -206,6 +234,7 @@
         {
             "id": "03253",
             "nombre": "Medicina Interna y Campos Clínicos I",
+            "anio": 4,
             "correlativas": [
                 "03248",
                 "03249"
@@ -214,6 +243,7 @@
         {
             "id": "03257",
             "nombre": "Salud del Adulto Mayor",
+            "anio": 5,
             "correlativas": [
                 "03253",
                 "03254"
@@ -222,6 +252,7 @@
         {
             "id": "03260",
             "nombre": "Bioética, Derechos Humanos y Legislación en Salud",
+            "anio": 5,
             "correlativas": [
                 "03251",
                 "03265",
@@ -231,6 +262,7 @@
         {
             "id": "03267",
             "nombre": "Integradora Avanzada I",
+            "anio": 5,
             "correlativas": [
                 "03261",
                 "03262",
@@ -243,6 +275,7 @@
         {
             "id": "03268",
             "nombre": "Integradora Avanzada II",
+            "anio": 5,
             "correlativas": [
                 "03261",
                 "03262",
@@ -255,6 +288,7 @@
         {
             "id": "03258",
             "nombre": "Medicina Interna y Campos Clínicos II",
+            "anio": 5,
             "correlativas": [
                 "03253",
                 "03254"
@@ -263,6 +297,7 @@
         {
             "id": "03259",
             "nombre": "Clínica Quirúrgica",
+            "anio": 5,
             "correlativas": [
                 "03250",
                 "03253",
@@ -272,6 +307,7 @@
         {
             "id": "03269",
             "nombre": "Práctica Final Obligatoria",
+            "anio": 6,
             "correlativas": [
                 "03252",
                 "03255",

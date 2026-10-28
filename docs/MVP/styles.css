@@ -2,7 +2,7 @@
    Basado estrictamente en los wireframes y tokens de docs/diseno/wireframe/wireframe_quickmap.html */
 
 :root {
-  --bg: #e4e2db;
+  --bg: #f8f7f4;
   --card: #ffffff;
   --border: #c9c6bc;
   --border-strong: #8a877e;
@@ -10,17 +10,17 @@
   --text-secondary: #5c5952;
   --text-muted: #8a8780;
   
-  /* Estados según wireframe */
+  /* Estados */
   --red: #c62828;
-  --red-bg: #fbe4e4;
-  --red-text: #791f1f;
+  --red-border: #c62828;
+  --red-text: #c62828;
   
   --green: #2e7d32;
-  --green-bg: #e8f3e8;
-  --green-text: #1b5e20;
+  --green-border: #2e7d32;
+  --green-text: #2e7d32;
   
-  --gray-bg: #e2e0d9;
-  --gray-border: #a9a6a0;
+  --gray-bg: #d8d5cb;
+  --gray-border: #9e9a90;
   --gray-text: #6b6862;
   
   --hab-border: #1a2b6b;
@@ -232,13 +232,29 @@ body {
 .career-info {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 16px;
 }
 
-.career-name {
-  font-size: 16px;
-  font-weight: 600;
+.career-title-container {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.career-subtitle-label {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-muted);
+}
+
+.career-main-title {
+  font-size: 19px;
+  font-weight: 700;
   color: var(--text);
+  line-height: 1.2;
+  margin: 0;
 }
 
 .toolbar-actions {
@@ -249,7 +265,7 @@ body {
 
 /* Barra de leyenda y estadísticas */
 .legend-bar {
-  background: #f7f6f2;
+  background: #ffffff;
   border-bottom: 1px solid var(--border);
   padding: 8px 24px;
   display: flex;
@@ -262,16 +278,32 @@ body {
 .legend-items {
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 18px;
   flex-wrap: wrap;
 }
 
 .legend-item {
   display: flex;
   align-items: center;
-  gap: 6px;
-  font-size: 12px;
-  color: var(--text-secondary);
+  gap: 7px;
+  font-size: 12.5px;
+  font-weight: 600;
+}
+
+.legend-critica {
+  color: var(--red);
+}
+
+.legend-habilitada {
+  color: var(--hab-border);
+}
+
+.legend-bloqueada {
+  color: #6b6862;
+}
+
+.legend-aprobada {
+  color: var(--green);
 }
 
 .swatch {
@@ -283,23 +315,29 @@ body {
 }
 
 .swatch-critica {
-  background: var(--red-bg);
-  border: 1.5px solid var(--red);
+  background: #ffffff;
+  border: 2px solid var(--red);
 }
 
 .swatch-habilitada {
-  background: var(--hab-bg);
+  background: #ffffff;
   border: 2px solid var(--hab-border);
 }
 
-.swatch-aprobada {
-  background: var(--gray-bg);
-  border: 1.5px solid var(--gray-border);
+.swatch-bloqueada {
+  background: #d8d5cb;
+  border: 1.5px solid #9e9a90;
 }
 
-.swatch-bloqueada {
-  background: var(--card);
-  border: 1.5px solid var(--border-strong);
+.swatch-aprobada {
+  background: #ffffff;
+  border: 2px solid var(--green);
+}
+
+.legend-symbol {
+  font-weight: 700;
+  margin-left: 4px;
+  display: inline-block;
 }
 
 .metrics-summary {
@@ -342,6 +380,9 @@ body {
 }
 
 .map-svg {
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
   display: block;
@@ -388,12 +429,18 @@ body {
 
 /* Cabeceras de Niveles (Columnas) */
 .column-header {
-  font-size: 12px;
+  font-size: 13px;
   font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.05em;
   fill: var(--text-secondary);
   text-anchor: middle;
+}
+
+.year-group-box {
+  fill: rgba(0, 0, 0, 0.016);
+  stroke: rgba(0, 0, 0, 0.08);
+  stroke-dasharray: 4 4;
 }
 
 /* Aristas (Flechas de Correlatividad) */
@@ -412,10 +459,9 @@ body {
 }
 
 .edge-path.edge-approved {
-  stroke: var(--gray-border);
-  stroke-width: 1.2px;
-  stroke-dasharray: 4 3;
-  opacity: 0.35;
+  stroke: var(--green);
+  stroke-width: 1.5px;
+  opacity: 0.55;
 }
 
 .edge-path.edge-highlight-in {
@@ -439,80 +485,96 @@ body {
   padding: 8px 10px;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: flex-start;
+  gap: 3px;
   cursor: pointer;
   transition: transform 0.12s, box-shadow 0.12s, border-color 0.12s, background-color 0.12s, opacity 0.12s;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.06);
 }
 
 .node-card:hover {
   transform: translateY(-2px);
-  box-shadow: 0 5px 12px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 5px 12px rgba(0, 0, 0, 0.12);
 }
 
-/* Estado: Camino Crítico */
+/* Estado: Aprobada o Promocionada (Req 1: fondo blanco, borde y letra verde) */
+.node-card.status-aprobada {
+  background: #ffffff;
+  border: 2px solid var(--green);
+  color: var(--green);
+  opacity: 1;
+}
+
+.node-card.status-aprobada:hover {
+  box-shadow: 0 4px 12px rgba(46, 125, 50, 0.22);
+}
+
+/* Estado: Camino Crítico (Req 2: fondo blanco, borde y letras rojo) */
 .node-card.status-critica {
-  background: var(--red-bg);
+  background: #ffffff;
   border: 2px solid var(--red);
-  color: var(--red-text);
+  color: var(--red);
+  opacity: 1;
+}
+
+.node-card.status-critica:hover {
+  box-shadow: 0 4px 12px rgba(198, 40, 40, 0.22);
 }
 
 /* Estado: Habilitada para cursar */
 .node-card.status-habilitada {
-  background: var(--card);
+  background: #ffffff;
   border: 2px solid var(--hab-border);
   color: var(--hab-text);
+  opacity: 1;
 }
 
-/* Estado: Bloqueada */
+.node-card.status-habilitada:hover {
+  box-shadow: 0 4px 12px rgba(26, 43, 107, 0.22);
+}
+
+/* Estado: Bloqueada (Color más opaco que las no seleccionadas disponibles) */
 .node-card.status-bloqueada {
-  background: var(--card);
-  border: 1.5px solid var(--border-strong);
-  color: var(--text-secondary);
+  background: #d8d5cb;
+  border: 1.5px solid #9e9a90;
+  color: #55524b;
+  opacity: 0.72;
+  box-shadow: none;
 }
 
-/* Estado: Aprobada (Grisada según requerimiento) */
-.node-card.status-aprobada {
-  background: var(--gray-bg);
-  border: 1.5px solid var(--gray-border);
-  color: var(--gray-text);
-  opacity: 0.65;
-}
-
-.node-card.status-aprobada:hover {
-  opacity: 0.85;
+.node-card.status-bloqueada:hover {
+  opacity: 0.88;
 }
 
 /* Estado pendiente de guardar (seleccionada en la sesión actual) */
 .node-card.pending-selection {
   outline: 2px dashed var(--green);
-  outline-offset: 1px;
+  outline-offset: 2px;
 }
 
-/* Elementos internos del nodo */
+/* Elementos internos del nodo (Req 3: símbolo únicamente en superior derecha, sin tildes interactivos) */
 .node-top-row {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 4px;
 }
 
 .node-id {
   font-size: 10px;
-  font-weight: 600;
+  font-weight: 700;
   letter-spacing: 0.02em;
-  opacity: 0.75;
+  opacity: 0.8;
 }
 
-.node-checkbox {
-  width: 15px;
-  height: 15px;
-  cursor: pointer;
-  accent-color: var(--green);
+.node-symbol {
+  font-weight: 700;
+  font-size: 13px;
+  line-height: 1;
 }
 
+/* Nombre de la materia (Req 8: debajo del nombre no debe verse el estado) */
 .node-name {
-  font-size: 11px;
+  font-size: 11.5px;
   font-weight: 600;
   line-height: 1.25;
   display: -webkit-box;
@@ -520,42 +582,17 @@ body {
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
-  margin: 2px 0;
 }
 
-.node-bottom-row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  font-size: 9.5px;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.02em;
+/* Animación de rechazo cuando se intenta seleccionar una materia con correlativas previas adeudadas (Req 6) */
+@keyframes shake-error {
+  0%, 100% { transform: translateX(0); }
+  20%, 60% { transform: translateX(-4px); }
+  40%, 80% { transform: translateX(4px); }
 }
 
-.status-tag {
-  padding: 1px 5px;
-  border-radius: 3px;
-}
-
-.tag-critica {
-  background: rgba(198, 40, 40, 0.15);
-  color: var(--red);
-}
-
-.tag-habilitada {
-  background: rgba(26, 43, 107, 0.12);
-  color: var(--hab-border);
-}
-
-.tag-aprobada {
-  background: rgba(107, 104, 98, 0.2);
-  color: var(--gray-text);
-}
-
-.tag-bloqueada {
-  background: rgba(138, 135, 128, 0.15);
-  color: var(--text-secondary);
+.node-card.shake-error {
+  animation: shake-error 0.35s ease;
 }
 
 /* Banner de Notificación / Toast */

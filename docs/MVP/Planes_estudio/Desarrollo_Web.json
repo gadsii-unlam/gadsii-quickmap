@@ -4,26 +4,31 @@
         {
             "id": "2619",
             "nombre": "Programación Básica I",
+            "anio": 1,
             "correlativas": []
         },
         {
             "id": "2620",
             "nombre": "Informática General",
+            "anio": 1,
             "correlativas": []
         },
         {
             "id": "2621",
             "nombre": "Matemática General",
+            "anio": 1,
             "correlativas": []
         },
         {
             "id": "2622",
             "nombre": "Inglés Técnico I",
+            "anio": 1,
             "correlativas": []
         },
         {
             "id": "2623",
             "nombre": "Programación Básica II",
+            "anio": 1,
             "correlativas": [
                 "2619"
             ]
@@ -31,6 +36,7 @@
         {
             "id": "2624",
             "nombre": "Programación Web I",
+            "anio": 1,
             "correlativas": [
                 "2619",
                 "2620"
@@ -39,6 +45,7 @@
         {
             "id": "2625",
             "nombre": "Base de Datos I",
+            "anio": 1,
             "correlativas": [
                 "2619",
                 "2620",
@@ -48,6 +55,7 @@
         {
             "id": "2626",
             "nombre": "Introducción al Diseño Gráfico en la Web",
+            "anio": 1,
             "correlativas": [
                 "2620"
             ]
@@ -55,6 +63,7 @@
         {
             "id": "2627",
             "nombre": "Inglés Técnico II",
+            "anio": 1,
             "correlativas": [
                 "2622"
             ]
@@ -62,6 +71,7 @@
         {
             "id": "2628",
             "nombre": "Programación Web II",
+            "anio": 2,
             "correlativas": [
                 "2623",
                 "2624",
@@ -71,6 +81,7 @@
         {
             "id": "2629",
             "nombre": "Diseño de Aplicaciones Web",
+            "anio": 2,
             "correlativas": [
                 "2623",
                 "2624",
@@ -80,6 +91,7 @@
         {
             "id": "2630",
             "nombre": "Visualización e Interfaces",
+            "anio": 2,
             "correlativas": [
                 "2624",
                 "2626"
@@ -88,6 +100,7 @@
         {
             "id": "2631",
             "nombre": "Taller Web I",
+            "anio": 2,
             "correlativas": [
                 "2623",
                 "2624",
@@ -97,6 +110,7 @@
         {
             "id": "2632",
             "nombre": "Base de Datos II",
+            "anio": 2,
             "correlativas": [
                 "2625",
                 "2629"
@@ -105,6 +119,7 @@
         {
             "id": "2633",
             "nombre": "Programación Web III",
+            "anio": 2,
             "correlativas": [
                 "2628",
                 "2629",
@@ -114,6 +129,7 @@
         {
             "id": "2634",
             "nombre": "Tecnología de Redes",
+            "anio": 2,
             "correlativas": [
                 "2630"
             ]
@@ -121,6 +137,7 @@
         {
             "id": "2635",
             "nombre": "Taller Web II",
+            "anio": 2,
             "correlativas": [
                 "2631"
             ]
@@ -128,6 +145,7 @@
         {
             "id": "2636",
             "nombre": "Seguridad y Calidad en Aplicaciones Web",
+            "anio": 2,
             "correlativas": [
                 "2628",
                 "2629"
@@ -136,6 +154,7 @@
         {
             "id": "2637",
             "nombre": "Introducción a la Administración de Proyectos",
+            "anio": 3,
             "correlativas": [
                 "2632",
                 "2633",
@@ -145,6 +164,7 @@
         {
             "id": "2638",
             "nombre": "Taller Práctico Integrador",
+            "anio": 3,
             "correlativas": [
                 "2632",
                 "2633",
