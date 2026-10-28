@@ -210,8 +210,28 @@ Los atributos que seleccionamos en base al análisis del TP 2 son:
 
 *   **Tasa de correción de planificación (TCP):** Esta métrica se basa en medir el porcentaje de estudiantes que modifican su elección inicial de materias inmediatamente después de interactuar con el MVP de QuickMap, al descubrir su camino crítico. La forma de medirla es pedirles a los estudiantes que anoten las materias a las cuales planean inscribirse en el próximo cuatrimestre utilizando los métodos tradicionales, y luego verificar si modifican su elección al interactuar con QuickMap. En caso de que la TCP supere el 30% se confirma nuestra hipótesis inicial.
 
-*   **Tasa de conocimiento de camino crítico (TCCC):** Esta métrica se basa en medir el porcentaje de estudiantes que conocen el camino crítico de su carrera antes de interactuar con QuickMap utilizando los métodos tradicionales. Para medirla se les plantearía un caso hipotético en historial académico y se les pediría que marquen cuales son las 3 materias que se deberían anotar en el siguiente cuatrimestre para recibirse lo antes posible. En caso de que el 80% de los estudiantes conozcan el camino crítico de su carrera antes de interactuar con QuickMap, se refuta nuestra hipótesis inicial.
+*   **Tasa de conocimiento de camino crítico (TCCC):** Esta métrica se basa en medir el porcentaje de estudiantes que conocen el camino crítico de su carrera antes de interactuar con QuickMap utilizando los métodos tradicionales. Para medirla se les plantearía un caso con su historial académico y se les pediría que marquen cuales son las 3 materias que se deberían anotar en el siguiente cuatrimestre para recibirse lo antes posible. En caso de que el 80% de los estudiantes conozcan el camino crítico de su carrera antes de interactuar con QuickMap, se refuta nuestra hipótesis inicial.
 
 #### Métrica vanidosa
 
 *   **Tasa de alumnos que vuelven a utilizar QuickMap en el siguiente cuatrimestre:** Esta métrica es vanidosa porque parecería indicar que si los alumnos vuelven a usar la herramienta es porque les sirve para determinar a que materias les conviene anotarse, pero la realidad es que esto no comprueba de ninguna manera que hoy en día exista opacidad o dificultar para conocer el camino crítico. Los alumnos por ejemplo podrían volver a utilizar la herramienta simplemente porque les gusta la interfaz o porque almacena el historial académico, pero no porque les ayude a tomar mejores decisiones.
+
+## Parte 3 - Probar
+### Tarea
+Tenés tiempo para cursar solamente 3 materias el próximo cuatrimestre. Tu objetivo es elegir las 3 materias que más te convengan para no trabarte en tercer año y recibirte lo antes posible. Mostrame cómo resolverías esto y decime en qué 3 materias te anotarías.
+
+### ¿Qué se observa?
+* **Comprensión del código de colores:**
+* ¿El usuario entiende de inmediato como debe seleccionar las materias que ya tiene aprobadas o promocionadas?
+* ¿El usuario entiende de inmediato que materias tiene habilitadas para cursar en el siguiente cuatrimestre luego de guardar las materias que ya tiene aprobadas o promocionadas?
+* **Identificación del camino crítico:** ¿Para elegir las 3 materias, sigue el camino crítico generado o debe ir buscando materia por materia cuál tiene habilitada?
+* **Pedidos de asistencia:** ¿Cuantas veces dice "no entiendo" o solicita ayuda?
+
+### Registro
+* **Grabación de pantalla + Audio con protocolo Think Aloud (Pensar en voz alta):** Se le pide al usuario que relate todo lo que va pensando mientras mueve el mouse.
+* **Registro de tiempos y tasa de éxito:** Se cronometra cuántos minutos/segundos tarda desde que carga sus materias aprobadas hasta que define las 3 materias a cursar (Time on Task), y se registra si las 3 elegidas son efectivamente las del camino crítico óptimo.
+
+### Preguntas finales
+* **Validar el criterio de decisión:** ¿Por qué elegiste esas 3 materias en particular y descartaste las demás?
+* **Comparar con experiencia tradicional:** ¿Cómo sentiste este proceso comparado con la forma en la que armaste tu inscripción el cuatrimestre pasado?
+* **Detectar fricción oculta:** ¿Hubo algún momento o algún color del mapa que te haya hecho dudar sobre qué significaba?
