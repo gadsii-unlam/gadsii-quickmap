@@ -1,6 +1,6 @@
-# Evidencia usuario 1 (Martina Bartoli)
+# Evidencia usuario 1 (Agustín Larizza)
 
-[**Grabación**](https://www.loom.com/share/8a3c7419114d4e7b8c72dc41bc70d53a)
+[**Grabación**](https://drive.google.com/file/d/1LkCcfjbVOKTAckEit38Vn-1Nc8DNuWtN/view?usp=sharing)
 
 1) El usuario entiende cómo seleccionar materias?\
    Sí, el usuario entiende la interfaz en lo que respecta a la selección de materias.
@@ -10,10 +10,8 @@
 
 3) Identificación de camino crítico:
 
-   - El usuario no fue capaz de seleccionar las 3 materias del camino crítico.
-   - **Causas:**
-     - El usuario no presta atención a los colores.
-     - El usuario no identifica el concepto de camino crítico.
+   - El usuario no fue capaz de seleccionar un camino critico dado que la carrera tiene alto nivel de correlatividad entre materias.
+   - El usuario no identifica el concepto de camino crítico.
 
 4) Cuántas veces solicita ayuda?\
-   El usuario no identifica que una vez seleccionadas las materías debe guardarlas
+   Ninguna, entendio correctamente que debe hacer click para seleccionar que cursar y guardar su seleccion para dar por "cursado" ese cuatrimestre.
