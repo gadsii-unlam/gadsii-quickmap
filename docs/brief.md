@@ -1,9 +1,12 @@
 # Brief de Proyecto: QuickMap
 
-**Versión de Documento:** 1.0  
-**Fecha:** 23 de Agosto de 2026  
+**Versión de Documento:** 4.0  
+**Fecha:** 7 de Noviembre de 2026  
 **Materia:** Gestión Aplicada al Desarrollo de Software II (3665)  
 **Universidad Nacional de La Matanza (UNLaM)**
+
+## Cambios respecto de la versión 3
+A partir de la construcción y puesta a prueba del MVP con los tres usuarios reales representativos del segmento (U1, U2 y U3), se evaluó el desempeño del producto. Se aprendió que, si bien la interfaz resuelve la visualización del plan de estudios, la premisa de valor central quedó refutada: ningún usuario utilizó ni comprendió el concepto de "camino crítico" para planificar su inscripción. Con base en esta evidencia, se toma la decisión de **PIVOTAR (Pivote de Necesidad del Consumidor / Canal de comunicación)**. Se preserva el mapa interactivo, la tecnología y el objetivo de evitar atrasos curriculares, pero se pivota en la forma en que se comunica la prioridad: se abandona la pretensión de que el estudiante interprete un grafo analítico técnico y se adopta una vista simplificada que jerarquiza de forma directa las materias prioritarias del cuatrimestre inmediato.
 
 ---
 
@@ -199,39 +202,21 @@ Los atributos que seleccionamos en base al análisis del TP 2 son:
 *   **Facilidad de aprendizaje:** El producto debe ser fácil de aprender a utilizarlo porque los estudiantes hoy en día ya utilizan otras herramientas como por ejemplo: planillas de Excel, anotaciones en cuadernos y grupos de WhatsApp para poder dar seguimiento a sus planes de estudio, por lo que si nuestro producto es difícil de aprender a utilizar, es probable que los usuarios continúen utilizando las mismas herramientas que hasta ahora porque ya las conocen.
 *   **Recuerdo en el tiempo:** Nuestro producto no será utilizado por los usuarios todo el tiempo, su uso es más esporádico, seguramente cuando más se utilice sea en las fechas cercanas a las inscripciones y un par de veces más durante el año de forma aislada, por lo tanto es necesario que cada vez que el usuario acceda recuerde fácilmente cómo utilizar el sistema, porque al igual que en el punto anterior, si cada vez que deben volver a utilizarlo tardan mucho en recordar cómo acceder a lo que necesitan o tienen que “re aprender” como hacerlo, pueden frustrarse y optar por opciones ya conocidas.
 *   **Satisfacción:** Es importante que los usuarios se sientan satisfechos con el sistema ya que por lo que obtuvimos en las encuestas sienten una gran frustración por no poder entender correctamente a qué materias les conviene anotarse en cada inscripción, por lo que si logramos que los alumnos entiendan bien su situación actual y los ayudamos a planificar sus cuatrimestres de la mejor manera posible a través de los camino críticos, entonces lograremos tener un impacto positivos en ellos y que puedan atravesar la etapa de inscripción de una mejor manera.
-
 # Trabajo práctico 5: Construcción del MVP, Prueba y Aprendizaje
 
-## Parte 1 - Antes de construir
+### **Capa de Usabilidad**
 
-### 1. Métricas y criterios de éxito
+A nivel operativo, el MVP funciona de manera fluida: los usuarios comprendieron cómo seleccionar materias y visualizar su estado. La principal fricción fue que un usuario no identificó que debía presionar *Guardar* para consolidar los cambios. Sin embargo, la comunicación visual del camino crítico no fue efectiva: el borde rojo pasó desapercibido, la cantidad de conexiones generó sobrecarga visual y el término *camino crítico* no transmitió claramente qué acción debía tomar el alumno.
 
-#### Métricas accionables
+### **Capa de Negocio**
 
-*   **Tasa de correción de planificación (TCP):** Esta métrica se basa en medir el porcentaje de estudiantes que modifican su elección inicial de materias inmediatamente después de interactuar con el MVP de QuickMap, al descubrir su camino crítico. La forma de medirla es pedirles a los estudiantes que anoten las materias a las cuales planean inscribirse en el próximo cuatrimestre utilizando los métodos tradicionales, y luego verificar si modifican su elección al interactuar con QuickMap. En caso de que la TCP supere el 30% se confirma nuestra hipótesis inicial.
+El MVP valida el valor de reemplazar los PDF estáticos por un visualizador interactivo. Sin embargo, **la hipótesis de valor queda refutada**: frente a un objetivo de que el 80% de los usuarios utilizara el camino crítico para planificar su inscripción, el resultado fue del **0% (0 de 3)**. Esto demuestra que, aunque el problema del atraso curricular existe, mostrar un camino crítico no es suficiente. Los alumnos necesitan recomendaciones concretas sobre qué materias priorizar, no interpretar un grafo para tomar decisiones.
 
-*   **Tasa de conocimiento de camino crítico (TCCC):** Esta métrica se basa en medir el porcentaje de estudiantes que conocen el camino crítico de su carrera antes de interactuar con QuickMap utilizando los métodos tradicionales. Para medirla se les plantearía un caso con su historial académico y se les pediría que marquen cuales son las 3 materias que se deberían anotar en el siguiente cuatrimestre para recibirse lo antes posible. En caso de que el 80% de los estudiantes conozcan el camino crítico de su carrera antes de interactuar con QuickMap, se refuta nuestra hipótesis inicial.
+### **Decisión estratégica: Pivotar**
 
-#### Métrica vanidosa
+- **Qué preservamos:** La pantalla del mapa interactivo, la tecnología y el objetivo de resolver la desorientación al momento de inscribirse. El experimento confirmó que el problema existe, aunque la forma propuesta para resolverlo no fue efectiva.
 
-*   **Tasa de alumnos que vuelven a utilizar QuickMap en el siguiente cuatrimestre:** Esta métrica es vanidosa porque parecería indicar que si los alumnos vuelven a usar la herramienta es porque les sirve para determinar a que materias les conviene anotarse, pero la realidad es que esto no comprueba de ninguna manera que hoy en día exista opacidad o dificultar para conocer el camino crítico. Los alumnos por ejemplo podrían volver a utilizar la herramienta simplemente porque les gusta la interfaz o porque almacena el historial académico, pero no porque les ayude a tomar mejores decisiones.
-
-## Parte 3 - Probar
-### Tarea
-Tenés tiempo para cursar solamente 3 materias el próximo cuatrimestre. Tu objetivo es elegir las 3 materias que más te convengan para no trabarte en tercer año y recibirte lo antes posible. Mostrame cómo resolverías esto y decime en qué 3 materias te anotarías.
-
-### ¿Qué se observa?
-* **Comprensión del código de colores:**
-* ¿El usuario entiende de inmediato como debe seleccionar las materias que ya tiene aprobadas o promocionadas?
-* ¿El usuario entiende de inmediato que materias tiene habilitadas para cursar en el siguiente cuatrimestre luego de guardar las materias que ya tiene aprobadas o promocionadas?
-* **Identificación del camino crítico:** ¿Para elegir las 3 materias, sigue el camino crítico generado o debe ir buscando materia por materia cuál tiene habilitada?
-* **Pedidos de asistencia:** ¿Cuantas veces dice "no entiendo" o solicita ayuda?
-
-### Registro
-* **Grabación de pantalla + Audio con protocolo Think Aloud (Pensar en voz alta):** Se le pide al usuario que relate todo lo que va pensando mientras mueve el mouse.
-* **Registro de tiempos y tasa de éxito:** Se cronometra cuántos minutos/segundos tarda desde que carga sus materias aprobadas hasta que define las 3 materias a cursar (Time on Task), y se registra si las 3 elegidas son efectivamente las del camino crítico óptimo.
-
-### Preguntas finales
-* **Validar el criterio de decisión:** ¿Por qué elegiste esas 3 materias en particular y descartaste las demás?
-* **Comparar con experiencia tradicional:** ¿Cómo sentiste este proceso comparado con la forma en la que armaste tu inscripción el cuatrimestre pasado?
-* **Detectar fricción oculta:** ¿Hubo algún momento o algún color del mapa que te haya hecho dudar sobre qué significaba?
+- **Qué cambiamos:** La forma de comunicar y destacar las materias prioritarias:
+  1. **Reducir el ruido visual:** Atenuar las materias aprobadas o que no son relevantes para el próximo cuatrimestre.
+  2. **Simplificar el lenguaje:** Reemplazar *camino crítico* por *materias prioritarias*.
+  3. **Destacar las prioridades:** Incorporar indicadores visibles dentro de las tarjetas (por ejemplo, #1, #2 y #3) para orientar la elección.
