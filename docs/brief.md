@@ -206,7 +206,7 @@ Los atributos que seleccionamos en base al análisis del TP 2 son:
 
 ### **Capa de Usabilidad**
 
-A nivel operativo, el MVP funciona de manera fluida: los usuarios comprendieron cómo seleccionar materias y visualizar su estado. La principal fricción fue que un usuario no identificó que debía presionar *Guardar* para consolidar los cambios. Sin embargo, la comunicación visual del camino crítico no fue efectiva: el borde rojo pasó desapercibido, la cantidad de conexiones generó sobrecarga visual y el término *camino crítico* no transmitió claramente qué acción debía tomar el alumno.
+A nivel operativo, el MVP funciona de manera fluida: los usuarios comprendieron cómo seleccionar materias y visualizar su estado. La principal fricción fue que un usuario no identificó que debía presionar *Guardar* para consolidar los cambios, este problema no se había anticipado que podía existir previamente. Además, la comunicación visual del camino crítico no fue efectiva: el borde rojo pasó desapercibido, la cantidad de conexiones generó sobrecarga visual y el término *camino crítico* no transmitió claramente qué acción debía tomar el alumno. Por lo tanto, si bien el MVP se desarrollo en base a las correcciones aceptadas previamente, por lo tanto, dichos problemas no aparecieron, si surgieron nuevos problemas relacionados con el sustento visual y el entendimiento del concepto de "camino crítico" por parte de los usuarios.
 
 ### **Capa de Negocio**
 
@@ -214,9 +214,15 @@ El MVP valida el valor de reemplazar los PDF estáticos por un visualizador inte
 
 ### **Decisión estratégica: Pivotar**
 
+- **Tipo de pivot:** Zoom-out
+
+- **Nueva hipótesis:** 
+Creemos que los estudiantes de los primeros años de la UNLaM (1° y 2° año de cursada) tienen el problema de la desorientación en la planificación de sus cuatrimestres y la consecuente frustración de incurrir en bloqueos involuntarios de correlatividades. Esto debido a la complejidad de entender las relaciones entre materias en los planes de estudio con un formato de documento PDF, así como también una falta de recomendación dínamica teniendo en cuenta multiples aspectos de un conjunto de materias como su dificultad, duración, e historial del alumnos (materias previamente aprobadas, aquellas que todavía no cursaron y las que tienen pendientes de final).
+
 - **Qué preservamos:** La pantalla del mapa interactivo, la tecnología y el objetivo de resolver la desorientación al momento de inscribirse. El experimento confirmó que el problema existe, aunque la forma propuesta para resolverlo no fue efectiva.
 
 - **Qué cambiamos:** La forma de comunicar y destacar las materias prioritarias:
   1. **Reducir el ruido visual:** Atenuar las materias aprobadas o que no son relevantes para el próximo cuatrimestre.
   2. **Simplificar el lenguaje:** Reemplazar *camino crítico* por *materias prioritarias*.
   3. **Destacar las prioridades:** Incorporar indicadores visibles dentro de las tarjetas (por ejemplo, #1, #2 y #3) para orientar la elección.
+  4. **Incorporar duración de la materia como un aspecto más para definir el camino crítico:** Tener en cuenta si una materia es cuatrimestral o anual para indicarla como crítica.
