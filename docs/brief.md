@@ -206,7 +206,7 @@ Los atributos que seleccionamos en base al análisis del TP 2 son:
 
 ### **Capa de Usabilidad**
 
-A nivel operativo, el MVP funciona de manera fluida: los usuarios comprendieron cómo seleccionar materias y visualizar su estado. La principal fricción fue que un usuario no identificó que debía presionar *Guardar* para consolidar los cambios, este problema no se había anticipado que podía existir previamente. Además, la comunicación visual del camino crítico no fue efectiva: el borde rojo pasó desapercibido, la cantidad de conexiones generó sobrecarga visual y el término *camino crítico* no transmitió claramente qué acción debía tomar el alumno. Por lo tanto, si bien el MVP se desarrollo en base a las correcciones aceptadas previamente, por lo tanto, dichos problemas no aparecieron, si surgieron nuevos problemas relacionados con el sustento visual y el entendimiento del concepto de "camino crítico" por parte de los usuarios.
+A nivel operativo, el MVP funciona de manera fluida: los usuarios comprendieron cómo seleccionar materias y visualizar su estado. La principal fricción fue que un usuario no identificó que debía presionar *Guardar* para consolidar los cambios, este problema no se había anticipado que podía existir previamente. Además, la comunicación visual del camino crítico no fue efectiva: el borde rojo pasó desapercibido, la cantidad de conexiones generó sobrecarga visual y el término *camino crítico* no transmitió claramente qué acción debía tomar el alumno. Por lo tanto, si bien el MVP se desarrolló en base a las correcciones aceptadas previamente, por lo tanto, dichos problemas no aparecieron, si surgieron nuevos problemas relacionados con el sustento visual y el entendimiento del concepto de "camino crítico" por parte de los usuarios.
 
 ### **Capa de Negocio**
 
@@ -214,7 +214,9 @@ El MVP valida el valor de reemplazar los PDF estáticos por un visualizador inte
 
 ### **Decisión estratégica: Pivotar**
 
-- **Tipo de pivot:** Zoom-out
+- **Tipo de pivot:** Zoom-out.
+
+Entendemos que debemos ampliar las features, tener en cuenta más aspectos de las materias y simplificar la carga visual para poder llegar a que los alumnos comprendan cuales son las materias más recomendadas para inscribirse en el siguiente cuatrimestre.
 
 - **Nueva hipótesis:** 
 Creemos que los estudiantes de los primeros años de la UNLaM (1° y 2° año de cursada) tienen el problema de la desorientación en la planificación de sus cuatrimestres y la consecuente frustración de incurrir en bloqueos involuntarios de correlatividades. Esto debido a la complejidad de entender las relaciones entre materias en los planes de estudio con un formato de documento PDF, así como también una falta de recomendación dínamica teniendo en cuenta multiples aspectos de un conjunto de materias como su dificultad, duración, e historial del alumnos (materias previamente aprobadas, aquellas que todavía no cursaron y las que tienen pendientes de final).
