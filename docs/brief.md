@@ -1,12 +1,12 @@
 # Brief de Proyecto: QuickMap
 
-**Versión de Documento:** 4.0  
-**Fecha:** 7 de Noviembre de 2026  
+**Versión de Documento:** 5.0  
+**Fecha:** 12 de Noviembre de 2026  
 **Materia:** Gestión Aplicada al Desarrollo de Software II (3665)  
 **Universidad Nacional de La Matanza (UNLaM)**
 
-## Cambios respecto de la versión 3
-A partir de la construcción y puesta a prueba del MVP con los tres usuarios reales representativos del segmento (U1, U2 y U3), se evaluó el desempeño del producto. Se aprendió que, si bien la interfaz resuelve la visualización del plan de estudios, la premisa de valor central quedó refutada: ningún usuario utilizó ni comprendió el concepto de "camino crítico" para planificar su inscripción. Con base en esta evidencia, se toma la decisión de **PIVOTAR (Pivote de Necesidad del Consumidor / Canal de comunicación)**. Se preserva el mapa interactivo, la tecnología y el objetivo de evitar atrasos curriculares, pero se pivota en la forma en que se comunica la prioridad: se abandona la pretensión de que el estudiante interprete un grafo analítico técnico y se adopta una vista simplificada que jerarquiza de forma directa las materias prioritarias del cuatrimestre inmediato.
+## Cambios respecto de la versión 4
+En esta versión se incorpora la definición arquitectónica para evolucionar desde el MVP hacia **La Gran Visión** del producto. Mientras que el MVP opera de forma local con planes de estudio estáticos y guardado en sesión, la arquitectura proyectada suma un Backend de Integración (`Node.js con Express`), un módulo de autenticación delegada (`OAuth 2.0 + JWT`) y una caché temporal en memoria (`Redis`) para conectarse en tiempo real con la API oficial de *Intraconsulta* de la UNLaM como única fuente de verdad. Asimismo, se incorporan las restricciones técnicas del contexto universitario (colapso de *Intraconsulta* en fechas de inscripción, restricciones de acceso por DNI/departamento y políticas de privacidad de datos y credenciales) y el riesgo de concurrencia sobre la capa de integración.
 
 ---
 
@@ -228,3 +228,21 @@ Creemos que los estudiantes de los primeros años de la UNLaM (1° y 2° año de
   2. **Simplificar el lenguaje:** Reemplazar *camino crítico* por *materias prioritarias*.
   3. **Destacar las prioridades:** Incorporar indicadores visibles dentro de las tarjetas (por ejemplo, #1, #2 y #3) para orientar la elección.
   4. **Incorporar duración de la materia como un aspecto más para definir el camino crítico:** Tener en cuenta si una materia es cuatrimestral o anual para indicarla como crítica.
+
+# Trabajo práctico 6: Arquitectura y La Gran Visión
+
+### **La Gran Visión en términos de arquitectura**
+
+En el **MVP**, la aplicación funciona de manera local: el usuario interactúa con la **Interfaz Gráfica**, un **Controlador de Aplicación** solicita los planes de estudio a un **Servidor HTTP Local** que lee de un **Almacenamiento Estático**, el **Motor de Camino Crítico (CPM)** procesa las materias restantes y el progreso se guarda temporalmente en un **Almacenamiento de Sesión**.
+
+Para alcanzar **La Gran Visión**, se preservan en el cliente web las partes ya cubiertas por el MVP (**Interfaz Gráfica** y **Motor Algorítmico CPM**), pero se reemplazan los planes estáticos y la carga manual por un **Backend de Integración** que conecta la aplicación en tiempo real con la **API Oficial de Intraconsulta UNLaM** (única fuente de verdad para historial, notas y planes). Esta nueva capa intermedia se compone de tres elementos:
+* **API REST Propia / Capa de Integración (`Node.js con Express`):** Actúa como orquestador entre el cliente web, los módulos internos e *Intraconsulta*. Se eligió `Node.js con Express` por familiaridad y dominio técnico del equipo, permitiendo usar el mismo lenguaje que en el frontend (JavaScript) sin curva de aprendizaje adicional.
+* **Módulo de Autenticación (`Protocolo OAuth 2.0 + JWT`):** Gestiona el login federado validando las credenciales directamente contra *Intraconsulta* para autorizar la lectura del historial académico.
+* **Caché Temporal (`Redis`):** Almacena en memoria RAM el historial y el plan recuperados durante los minutos que dura la sesión activa (mediante expiración *TTL*), brindando fluidez en las simulaciones y borrando los datos automáticamente al finalizar la sesión.
+
+### **Restricciones técnicas del contexto**
+
+La arquitectura de la Gran Visión responde directamente a las limitaciones técnicas y políticas de la UNLaM:
+* **Saturación de Intraconsulta y bloqueos en fechas de inscripción:** El tráfico de QuickMap tiende a concentrarse de forma explosiva en los días previos a las inscripciones, momento exacto en el que *Intraconsulta* suele saturarse y colapsar. A esto se suma que durante la inscripción un alumno no puede acceder a *Intraconsulta* fuera de su turno de DNI o para consultar otro departamento. Si bien `Redis` amortigua las consultas repetidas una vez iniciada la sesión, la **Capa de Integración (`API REST Propia`)** es el componente más riesgoso: en el primer ingreso de cada estudiante depende en tiempo real de *Intraconsulta*, por lo que ante miles de accesos simultáneos y posibles *timeouts* del servidor de la universidad podría sufrir un bloqueo en cascada.
+* **Privacidad de los datos académicos (Única fuente de verdad):** Por políticas de privacidad institucional, QuickMap no puede clonar ni persistir en una base de datos propia las actas ni las notas oficiales de los estudiantes. El uso de `Redis` con expiración *TTL* garantiza que los datos residan solo temporalmente en RAM durante la sesión y se autodestruyan al expirar.
+* **Seguridad y manejo de credenciales:** Para cumplir con las políticas básicas de seguridad y acceso a datos de la institución, QuickMap no debe almacenar las contraseñas universitarias de los alumnos en texto plano. El protocolo `OAuth 2.0 + JWT` resuelve esta restricción delegando la validación directamente ante *Intraconsulta*.
