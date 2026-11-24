@@ -1,9 +1,12 @@
 # Brief de Proyecto: QuickMap
 
-**Versión de Documento:** 1.0  
-**Fecha:** 23 de Agosto de 2026  
+**Versión de Documento:** 5.0  
+**Fecha:** 12 de Noviembre de 2026  
 **Materia:** Gestión Aplicada al Desarrollo de Software II (3665)  
 **Universidad Nacional de La Matanza (UNLaM)**
+
+## Cambios respecto de la versión 4
+En esta versión se incorpora la definición arquitectónica para evolucionar desde el MVP hacia **La Gran Visión** del producto. Mientras que el MVP opera de forma local con planes de estudio estáticos y guardado en sesión, la arquitectura proyectada suma un Backend de Integración (`Node.js con Express`), un módulo de autenticación delegada (`OAuth 2.0 + JWT`) y una caché temporal en memoria (`Redis`) para conectarse en tiempo real con la API oficial de *Intraconsulta* de la UNLaM como única fuente de verdad. Asimismo, se incorporan las restricciones técnicas del contexto universitario (colapso de *Intraconsulta* en fechas de inscripción, restricciones de acceso por DNI/departamento y políticas de privacidad de datos y credenciales) y el riesgo de concurrencia sobre la capa de integración.
 
 ---
 
@@ -199,3 +202,47 @@ Los atributos que seleccionamos en base al análisis del TP 2 son:
 *   **Facilidad de aprendizaje:** El producto debe ser fácil de aprender a utilizarlo porque los estudiantes hoy en día ya utilizan otras herramientas como por ejemplo: planillas de Excel, anotaciones en cuadernos y grupos de WhatsApp para poder dar seguimiento a sus planes de estudio, por lo que si nuestro producto es difícil de aprender a utilizar, es probable que los usuarios continúen utilizando las mismas herramientas que hasta ahora porque ya las conocen.
 *   **Recuerdo en el tiempo:** Nuestro producto no será utilizado por los usuarios todo el tiempo, su uso es más esporádico, seguramente cuando más se utilice sea en las fechas cercanas a las inscripciones y un par de veces más durante el año de forma aislada, por lo tanto es necesario que cada vez que el usuario acceda recuerde fácilmente cómo utilizar el sistema, porque al igual que en el punto anterior, si cada vez que deben volver a utilizarlo tardan mucho en recordar cómo acceder a lo que necesitan o tienen que “re aprender” como hacerlo, pueden frustrarse y optar por opciones ya conocidas.
 *   **Satisfacción:** Es importante que los usuarios se sientan satisfechos con el sistema ya que por lo que obtuvimos en las encuestas sienten una gran frustración por no poder entender correctamente a qué materias les conviene anotarse en cada inscripción, por lo que si logramos que los alumnos entiendan bien su situación actual y los ayudamos a planificar sus cuatrimestres de la mejor manera posible a través de los camino críticos, entonces lograremos tener un impacto positivos en ellos y que puedan atravesar la etapa de inscripción de una mejor manera.
+# Trabajo práctico 5: Construcción del MVP, Prueba y Aprendizaje
+
+### **Capa de Usabilidad**
+
+A nivel operativo, el MVP funciona de manera fluida: los usuarios comprendieron cómo seleccionar materias y visualizar su estado. La principal fricción fue que un usuario no identificó que debía presionar *Guardar* para consolidar los cambios, este problema no se había anticipado que podía existir previamente. Además, la comunicación visual del camino crítico no fue efectiva: el borde rojo pasó desapercibido, la cantidad de conexiones generó sobrecarga visual y el término *camino crítico* no transmitió claramente qué acción debía tomar el alumno. Por lo tanto, si bien el MVP se desarrolló en base a las correcciones aceptadas previamente, por lo tanto, dichos problemas no aparecieron, si surgieron nuevos problemas relacionados con el sustento visual y el entendimiento del concepto de "camino crítico" por parte de los usuarios.
+
+### **Capa de Negocio**
+
+El MVP valida el valor de reemplazar los PDF estáticos por un visualizador interactivo. Sin embargo, **la hipótesis de valor queda refutada**: frente a un objetivo de que el 80% de los usuarios utilizara el camino crítico para planificar su inscripción, el resultado fue del **0% (0 de 3)**. Esto demuestra que, aunque el problema del atraso curricular existe, mostrar un camino crítico no es suficiente. Los alumnos necesitan recomendaciones concretas sobre qué materias priorizar, no interpretar un grafo para tomar decisiones.
+
+### **Decisión estratégica: Pivotar**
+
+- **Tipo de pivot:** Zoom-out.
+
+Entendemos que debemos ampliar las features, tener en cuenta más aspectos de las materias y simplificar la carga visual para poder llegar a que los alumnos comprendan cuales son las materias más recomendadas para inscribirse en el siguiente cuatrimestre.
+
+- **Nueva hipótesis:** 
+Creemos que los estudiantes de los primeros años de la UNLaM (1° y 2° año de cursada) tienen el problema de la desorientación en la planificación de sus cuatrimestres y la consecuente frustración de incurrir en bloqueos involuntarios de correlatividades. Esto debido a la complejidad de entender las relaciones entre materias en los planes de estudio con un formato de documento PDF, así como también una falta de recomendación dínamica teniendo en cuenta multiples aspectos de un conjunto de materias como su dificultad, duración, e historial del alumnos (materias previamente aprobadas, aquellas que todavía no cursaron y las que tienen pendientes de final).
+
+- **Qué preservamos:** La pantalla del mapa interactivo, la tecnología y el objetivo de resolver la desorientación al momento de inscribirse. El experimento confirmó que el problema existe, aunque la forma propuesta para resolverlo no fue efectiva.
+
+- **Qué cambiamos:** La forma de comunicar y destacar las materias prioritarias:
+  1. **Reducir el ruido visual:** Atenuar las materias aprobadas o que no son relevantes para el próximo cuatrimestre.
+  2. **Simplificar el lenguaje:** Reemplazar *camino crítico* por *materias prioritarias*.
+  3. **Destacar las prioridades:** Incorporar indicadores visibles dentro de las tarjetas (por ejemplo, #1, #2 y #3) para orientar la elección.
+  4. **Incorporar duración de la materia como un aspecto más para definir el camino crítico:** Tener en cuenta si una materia es cuatrimestral o anual para indicarla como crítica.
+
+# Trabajo práctico 6: Arquitectura y La Gran Visión
+
+### **La Gran Visión en términos de arquitectura**
+
+En el **MVP**, la aplicación funciona de manera local: el usuario interactúa con la **Interfaz Gráfica**, un **Controlador de Aplicación** solicita los planes de estudio a un **Servidor HTTP Local** que lee de un **Almacenamiento Estático**, el **Motor de Camino Crítico (CPM)** procesa las materias restantes y el progreso se guarda temporalmente en un **Almacenamiento de Sesión**.
+
+Para alcanzar **La Gran Visión**, se preservan en el cliente web las partes ya cubiertas por el MVP (**Interfaz Gráfica** y **Motor Algorítmico CPM**), pero se reemplazan los planes estáticos y la carga manual por un **Backend de Integración** que conecta la aplicación en tiempo real con la **API Oficial de Intraconsulta UNLaM** (única fuente de verdad para historial, notas y planes). Esta nueva capa intermedia se compone de tres elementos:
+* **API REST Propia / Capa de Integración (`Node.js con Express`):** Actúa como orquestador entre el cliente web, los módulos internos e *Intraconsulta*. Se eligió `Node.js con Express` por familiaridad y dominio técnico del equipo, permitiendo usar el mismo lenguaje que en el frontend (JavaScript) sin curva de aprendizaje adicional.
+* **Módulo de Autenticación (`Protocolo OAuth 2.0 + JWT`):** Gestiona el login federado validando las credenciales directamente contra *Intraconsulta* para autorizar la lectura del historial académico.
+* **Caché Temporal (`Redis`):** Almacena en memoria RAM el historial y el plan recuperados durante los minutos que dura la sesión activa (mediante expiración *TTL*), brindando fluidez en las simulaciones y borrando los datos automáticamente al finalizar la sesión.
+
+### **Restricciones técnicas del contexto**
+
+La arquitectura de la Gran Visión responde directamente a las limitaciones técnicas y políticas de la UNLaM:
+* **Saturación de Intraconsulta y bloqueos en fechas de inscripción:** El tráfico de QuickMap tiende a concentrarse de forma explosiva en los días previos a las inscripciones, momento exacto en el que *Intraconsulta* suele saturarse y colapsar. A esto se suma que durante la inscripción un alumno no puede acceder a *Intraconsulta* fuera de su turno de DNI o para consultar otro departamento. Si bien `Redis` amortigua las consultas repetidas una vez iniciada la sesión, la **Capa de Integración (`API REST Propia`)** es el componente más riesgoso: en el primer ingreso de cada estudiante depende en tiempo real de *Intraconsulta*, por lo que ante miles de accesos simultáneos y posibles *timeouts* del servidor de la universidad podría sufrir un bloqueo en cascada.
+* **Privacidad de los datos académicos (Única fuente de verdad):** Por políticas de privacidad institucional, QuickMap no puede clonar ni persistir en una base de datos propia las actas ni las notas oficiales de los estudiantes. El uso de `Redis` con expiración *TTL* garantiza que los datos residan solo temporalmente en RAM durante la sesión y se autodestruyan al expirar.
+* **Seguridad y manejo de credenciales:** Para cumplir con las políticas básicas de seguridad y acceso a datos de la institución, QuickMap no debe almacenar las contraseñas universitarias de los alumnos en texto plano. El protocolo `OAuth 2.0 + JWT` resuelve esta restricción delegando la validación directamente ante *Intraconsulta*.

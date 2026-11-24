@@ -1,0 +1,618 @@
+/* QuickMap - Estilos visuales del MVP
+   Basado estrictamente en los wireframes y tokens de docs/diseno/wireframe/wireframe_quickmap.html */
+
+:root {
+  --bg: #f8f7f4;
+  --card: #ffffff;
+  --border: #c9c6bc;
+  --border-strong: #8a877e;
+  --text: #1f1e1c;
+  --text-secondary: #5c5952;
+  --text-muted: #8a8780;
+  
+  /* Estados */
+  --red: #c62828;
+  --red-border: #c62828;
+  --red-text: #c62828;
+  
+  --green: #2e7d32;
+  --green-border: #2e7d32;
+  --green-text: #2e7d32;
+  
+  --gray-bg: #d8d5cb;
+  --gray-border: #9e9a90;
+  --gray-text: #6b6862;
+  
+  --hab-border: #1a2b6b;
+  --hab-bg: #ffffff;
+  --hab-text: #1a2b6b;
+  
+  --accent-bg: #eef0fb;
+  --accent-border: #6a6fc4;
+  --accent-text: #33377f;
+  
+  --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--bg);
+  color: var(--text);
+  line-height: 1.4;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Header principal */
+.app-header {
+  background: var(--card);
+  border-bottom: 1.5px solid var(--border-strong);
+  padding: 12px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.brand-area {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+}
+
+.brand-title {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: -0.02em;
+}
+
+.brand-badge {
+  font-size: 11px;
+  font-weight: 600;
+  background: var(--accent-bg);
+  color: var(--accent-text);
+  border: 1px solid var(--accent-border);
+  border-radius: 4px;
+  padding: 2px 6px;
+  text-transform: uppercase;
+}
+
+/* Pantallas */
+.screen {
+  display: none;
+}
+
+.screen.active {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+/* PANTALLA 1: Selección de Carrera */
+#screen-selection {
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+}
+
+.selection-card {
+  background: var(--card);
+  border: 1.5px solid var(--border-strong);
+  border-radius: 12px;
+  padding: 32px;
+  width: 100%;
+  max-width: 460px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.card-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.card-subtitle {
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.4;
+}
+
+.field-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.field-label {
+  font-size: 12.5px;
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+
+.select-field {
+  width: 100%;
+  background: var(--bg);
+  border: 1px solid var(--border-strong);
+  border-radius: 8px;
+  padding: 12px 14px;
+  font-size: 14px;
+  font-family: inherit;
+  color: var(--text);
+  outline: none;
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg width='12' height='8' viewBox='0 0 12 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1.5L6 6.5L11 1.5' stroke='%235c5952' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+}
+
+.select-field:focus {
+  border-color: var(--accent-border);
+  box-shadow: 0 0 0 2px var(--accent-bg);
+}
+
+/* Botones */
+.btn {
+  border: 1px solid var(--border-strong);
+  border-radius: 8px;
+  background: var(--bg);
+  padding: 10px 16px;
+  font-size: 13px;
+  font-weight: 500;
+  font-family: inherit;
+  color: var(--text);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  text-decoration: none;
+  transition: all 0.15s ease;
+}
+
+.btn:hover:not(:disabled) {
+  background: #dad7ce;
+}
+
+.btn-primary {
+  background: var(--accent-bg);
+  border-color: var(--accent-border);
+  color: var(--accent-text);
+  font-weight: 600;
+}
+
+.btn-primary:hover:not(:disabled) {
+  background: #e2e5f8;
+}
+
+.btn-save {
+  background: var(--green-bg);
+  border-color: var(--green);
+  color: var(--green-text);
+  font-weight: 600;
+}
+
+.btn-save:hover:not(:disabled) {
+  background: #d8ebd8;
+}
+
+.btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+/* PANTALLA 2: Mapa de Grafos y Camino Crítico */
+#screen-map {
+  overflow: hidden;
+}
+
+.map-toolbar {
+  background: var(--card);
+  border-bottom: 1px solid var(--border);
+  padding: 10px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.career-info {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.career-title-container {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.career-subtitle-label {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-muted);
+}
+
+.career-main-title {
+  font-size: 19px;
+  font-weight: 700;
+  color: var(--text);
+  line-height: 1.2;
+  margin: 0;
+}
+
+.toolbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Barra de leyenda y estadísticas */
+.legend-bar {
+  background: #ffffff;
+  border-bottom: 1px solid var(--border);
+  padding: 8px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.legend-items {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  flex-wrap: wrap;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 12.5px;
+  font-weight: 600;
+}
+
+.legend-critica {
+  color: var(--red);
+}
+
+.legend-habilitada {
+  color: var(--hab-border);
+}
+
+.legend-bloqueada {
+  color: #6b6862;
+}
+
+.legend-aprobada {
+  color: var(--green);
+}
+
+.swatch {
+  width: 14px;
+  height: 14px;
+  border-radius: 3px;
+  display: inline-block;
+  flex: none;
+}
+
+.swatch-critica {
+  background: #ffffff;
+  border: 2px solid var(--red);
+}
+
+.swatch-habilitada {
+  background: #ffffff;
+  border: 2px solid var(--hab-border);
+}
+
+.swatch-bloqueada {
+  background: #d8d5cb;
+  border: 1.5px solid #9e9a90;
+}
+
+.swatch-aprobada {
+  background: #ffffff;
+  border: 2px solid var(--green);
+}
+
+.legend-symbol {
+  font-weight: 700;
+  margin-left: 4px;
+  display: inline-block;
+}
+
+.metrics-summary {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.stat-pill {
+  font-size: 12px;
+  font-weight: 500;
+  padding: 4px 10px;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  background: var(--card);
+  color: var(--text-secondary);
+}
+
+.stat-pill.highlight {
+  background: var(--accent-bg);
+  border-color: var(--accent-border);
+  color: var(--accent-text);
+  font-weight: 600;
+}
+
+/* Área del mapa interactivo */
+.map-viewport {
+  position: relative;
+  flex: 1;
+  height: calc(100vh - 170px);
+  min-height: 500px;
+  overflow: hidden;
+  background-color: var(--bg);
+  cursor: grab;
+  user-select: none;
+}
+
+.map-viewport:active {
+  cursor: grabbing;
+}
+
+.map-svg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* Controles de Zoom flotantes */
+.zoom-controls {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  background: var(--card);
+  border: 1.5px solid var(--border-strong);
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.12);
+  overflow: hidden;
+  z-index: 10;
+}
+
+.zoom-btn {
+  background: none;
+  border: none;
+  width: 36px;
+  height: 36px;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.1s;
+}
+
+.zoom-btn:not(:last-child) {
+  border-bottom: 1px solid var(--border);
+}
+
+.zoom-btn:hover {
+  background: var(--bg);
+}
+
+/* Cabeceras de Niveles (Columnas) */
+.column-header {
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  fill: var(--text-secondary);
+  text-anchor: middle;
+}
+
+.year-group-box {
+  fill: rgba(0, 0, 0, 0.016);
+  stroke: rgba(0, 0, 0, 0.08);
+  stroke-dasharray: 4 4;
+}
+
+/* Aristas (Flechas de Correlatividad) */
+.edge-path {
+  fill: none;
+  stroke: var(--border-strong);
+  stroke-width: 1.5px;
+  opacity: 0.45;
+  transition: stroke 0.2s, stroke-width 0.2s, opacity 0.2s;
+}
+
+.edge-path.edge-critical {
+  stroke: var(--red);
+  stroke-width: 2.5px;
+  opacity: 0.95;
+}
+
+.edge-path.edge-approved {
+  stroke: var(--green);
+  stroke-width: 1.5px;
+  opacity: 0.55;
+}
+
+.edge-path.edge-highlight-in {
+  stroke: var(--hab-border);
+  stroke-width: 2.5px;
+  opacity: 1;
+}
+
+.edge-path.edge-highlight-out {
+  stroke: var(--green);
+  stroke-width: 2.5px;
+  opacity: 1;
+}
+
+/* Nodos del Grafo (Cards de Materias) */
+.node-card {
+  width: 100%;
+  height: 100%;
+  border-radius: 8px;
+  box-sizing: border-box;
+  padding: 8px 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 3px;
+  cursor: pointer;
+  transition: transform 0.12s, box-shadow 0.12s, border-color 0.12s, background-color 0.12s, opacity 0.12s;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.06);
+}
+
+.node-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 12px rgba(0, 0, 0, 0.12);
+}
+
+/* Estado: Aprobada o Promocionada (Req 1: fondo blanco, borde y letra verde) */
+.node-card.status-aprobada {
+  background: #ffffff;
+  border: 2px solid var(--green);
+  color: var(--green);
+  opacity: 1;
+}
+
+.node-card.status-aprobada:hover {
+  box-shadow: 0 4px 12px rgba(46, 125, 50, 0.22);
+}
+
+/* Estado: Camino Crítico (Req 2: fondo blanco, borde y letras rojo) */
+.node-card.status-critica {
+  background: #ffffff;
+  border: 2px solid var(--red);
+  color: var(--red);
+  opacity: 1;
+}
+
+.node-card.status-critica:hover {
+  box-shadow: 0 4px 12px rgba(198, 40, 40, 0.22);
+}
+
+/* Estado: Habilitada para cursar */
+.node-card.status-habilitada {
+  background: #ffffff;
+  border: 2px solid var(--hab-border);
+  color: var(--hab-text);
+  opacity: 1;
+}
+
+.node-card.status-habilitada:hover {
+  box-shadow: 0 4px 12px rgba(26, 43, 107, 0.22);
+}
+
+/* Estado: Bloqueada (Color más opaco que las no seleccionadas disponibles) */
+.node-card.status-bloqueada {
+  background: #d8d5cb;
+  border: 1.5px solid #9e9a90;
+  color: #55524b;
+  opacity: 0.72;
+  box-shadow: none;
+}
+
+.node-card.status-bloqueada:hover {
+  opacity: 0.88;
+}
+
+/* Estado pendiente de guardar (seleccionada en la sesión actual) */
+.node-card.pending-selection {
+  outline: 2px dashed var(--green);
+  outline-offset: 2px;
+}
+
+/* Elementos internos del nodo (Req 3: símbolo únicamente en superior derecha, sin tildes interactivos) */
+.node-top-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.node-id {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  opacity: 0.8;
+}
+
+.node-symbol {
+  font-weight: 700;
+  font-size: 13px;
+  line-height: 1;
+}
+
+/* Nombre de la materia (Req 8: debajo del nombre no debe verse el estado) */
+.node-name {
+  font-size: 11.5px;
+  font-weight: 600;
+  line-height: 1.25;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Animación de rechazo cuando se intenta seleccionar una materia con correlativas previas adeudadas (Req 6) */
+@keyframes shake-error {
+  0%, 100% { transform: translateX(0); }
+  20%, 60% { transform: translateX(-4px); }
+  40%, 80% { transform: translateX(4px); }
+}
+
+.node-card.shake-error {
+  animation: shake-error 0.35s ease;
+}
+
+/* Banner de Notificación / Toast */
+.toast-notice {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%) translateY(100px);
+  background: #1f1e1c;
+  color: #ffffff;
+  padding: 10px 18px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 500;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+  transition: transform 0.25s ease;
+  z-index: 1000;
+  pointer-events: none;
+}
+
+.toast-notice.show {
+  transform: translateX(-50%) translateY(0);
+}
